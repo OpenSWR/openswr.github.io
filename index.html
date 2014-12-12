@@ -16,17 +16,15 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <a id="forkme_banner" href="https://github.com/openswr">View on GitHub</a>
+          <a id="forkme_banner" href="https://github.com/openswr/openswr">View on GitHub</a>
 
           <h1 id="project_title">OpenSWR</h1>
           <h2 id="project_tagline">A High Performance, Highly Scalable Software Rasterizer for OpenGL</h2>
 
-<!--
             <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/ospray/OpenSWR/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/ospray/OpenSWR/tarball/master">Download this project as a tar.gz file</a>
+              <a class="zip_download_link" href="https://github.com/openswr/openswr/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/openswr/openswr/tarball/master">Download this project as a tar.gz file</a>
             </section>
--->
         </header>
     </div>
 
@@ -36,21 +34,56 @@
         <h3>
 <a id="intro" class="anchor" href="#wintro" aria-hidden="true"><span class="octicon octicon-link"></span></a>Coming soon</h3>
 
-<p>The purpose of OpenSWR is to provide a high performance, highly scalable OpenGL compatible software rasterizer that allows use of unmodified visualization software.  This allows working with datasets where GPU hardware isn't available or is limiting.  OpenSWR is completely CPU-based, and runs on anything from laptops, to workstations, to compute nodes in HPC systems.</p>
+<p>The purpose of OpenSWR is to provide a high performance, highly
+scalable OpenGL compatible software rasterizer that allows use of
+unmodified visualization software.  This allows working with datasets
+where GPU hardware isn't available or is limiting.  OpenSWR is
+completely CPU-based, and runs on anything from laptops, to
+workstations, to compute nodes in HPC systems.</p>
 
 <p><a href="jpg/SpaceWeather_SWR.png"><img src="jpg/SpaceWeather_SWR.png" width="40%"></a>
 <a href="jpg/Wendell_SWR.png"><img src="jpg/Wendell_SWR.png" width="40%"></a></p>
 
 <p>OpenSWR internally builds on top of LLVM, and fully utilizes modern
-instruction sets like Intel(c) SSE, AVX, or AVX2 to achieve high rendering performance.</p>
+instruction sets like Intel(c) SSE, AVX, or AVX2 to achieve high
+rendering performance.</p>
 
-<p>We are currently putting the final touches on our first public "alpha" release of
-OpenSWR (to be released on this very site). Please hang on.</p>
+<p>OpenSWR builds a libGL.so which is a dropin replacement for the
+systems OpenGL library.  No recompilation of your programs is
+neccessary -- just set LD_LIBRARY_PATH or LD_PRELOAD to point to the
+directory or library and run your program as you normally would.</p>
+
+<p>We also provide the OSMesa API for offscreen rendering if that
+better suits your needs.  There is one addition to the api, <tt>void
+OSMesaFinishSWR(void)</tt>, which needs to be called to flush
+rendering to the memory buffer.</p>
 
         <h3>
 <a id="news" class="anchor" href="#news" aria-hidden="true"><span class="octicon octicon-link"></span></a>Updates</h3>
 
 <dl>
+
+<dt>Dec 12, 2014</dt>
+<dd>
+<p>ALPHA release.  This version is the first to be released to the public.  Please bear
+with us if there are build or functionality issues.  The major
+applications used for testing were ParaView and VisIt - if you are
+trying another program you may encounter missing features.</p>
+
+<p>This version is coming out as we are working on some major cleanups to
+the code.  In order to keep our commitment to release this to the
+community and to provide a well-tested version, we are releasing the
+code that was used for the SC14 demonstrations.  The next major
+release will contain the cleanups.</p>
+
+<p>The source code can be downloaded from here:
+<ul>
+<li><a href="https://github.com/OpenSWR/openswr/archive/v0.1.tar.gz">v0.1.tar.gz</a>
+<li><a href="https://github.com/OpenSWR/openswr/archive/v0.1.tar.gz">v0.1.zip</a>
+</ul>
+</p>
+</dd>
+
 <dt>Dec 8, 2014</dt>
 <dd>
 The slides for our OpenSWR-related talks at SC14 are now available:
