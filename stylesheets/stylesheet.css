@@ -129,8 +129,18 @@ em {
   font-style: italic;
 }
 
+cite {
+	font-style: italic;
+	font-size: 80%;
+}
+
 strong {
   font-weight: bold;
+}
+
+sup {
+  font-size: 80%;
+	vertical-align: super;
 }
 
 img {
