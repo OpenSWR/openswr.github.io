@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="OpenSWR : A High Performance, Highly Scalable software OpenGL implementation">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>OpenSWR</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/openswr/openswr">View on GitHub</a>
+
+          <h1 id="project_title">OpenSWR</h1>
+          <h2 id="project_tagline">A High Performance, Highly Scalable Software Rasterizer for OpenGL</h2>
+
+            <section id="contact">
+                For more information please <a href="mailto:openswr@googlegroups.com">send us an email</a>.
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+        <section id="main_content" class="inner">
+            <h3><a id="intro" class="anchor" href="#wintro" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+                Paraview and OpenSWR
+            </h3>
+
+<p>Here is a case study of ParaView, comparing OpenSWR performance to that of
+the Mesa llvmpipe.</p>
+
+<a href="jpg/OpenSWR_perf_vs_LLVMpipe.png"><img src="jpg/OpenSWR_perf_vs_LLVMpipe.png" width="95%"></a>
+
+<p> In the top graph, OpenSWR outperforms llvmpipe by 29x in a scene with 2.9
+million triangles and 51x when the geometry is increased to 106.2
+million triangles.  </p>
+
+<p> The bottom graph illustrates how OpenSWR performance scales with the number of
+cores used for rendering.  </p>
+
+System configuration:
+<ul>
+    <li>Intel<sup>&reg;</sup> Xeon<sup>&reg;</sup> E5-2699 v3 Processor, 2 x 18 cores, 2.3GHz
+    <li>ParaView 4.3.1 (unmodified, latest released version)</li>
+    <li>Mesa 10.5.1
+    <li>OpenSWR "alpha 2"
+    <li>TACC Isotropic turbulence data sets
+    <ul>
+        <li>Volumes ranging from 256<sup>3</sup> to 1280<sup>3</sup></li>
+        <li>Isosurface + slice extracted from each volume producing geometries 2.9M to 106.2M triangles</li>
+        <li>Model courtesy of the Texas Advanced Computing Center (TACC)
+    </ul>
+</ul>
+
+    </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">OpenSWR maintained by <a href="https://github.com/OpenSWR">OpenSWR</a>
+        <br>For information about compiler optimizations, see our <a href="https://software.intel.com/en-us/articles/optimization-notice#opt-en">Optimization Notice</a>.
+        <br>&copy;2009-2015 Intel Corporation</p>
+      </footer>
+    </div>
+
+  </body>
+</html>

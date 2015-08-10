@@ -21,18 +21,19 @@
           <h1 id="project_title">OpenSWR</h1>
           <h2 id="project_tagline">A High Performance, Highly Scalable Software Rasterizer for OpenGL</h2>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/openswr/openswr/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/openswr/openswr/tarball/master">Download this project as a tar.gz file</a>
+            <section id="contact">
+                For more information please <a href="mailto:openswr@googlegroups.com">send us an email</a>.
             </section>
+
         </header>
     </div>
 
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a id="intro" class="anchor" href="#wintro" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h3>
+    <section id="main_content" class="inner">
+        <h3><a id="intro" class="anchor" href="#wintro" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+            Overview
+        </h3>
 
 <p>The purpose of OpenSWR is to provide a high performance, highly
 scalable OpenGL compatible software rasterizer that allows use of
@@ -41,28 +42,40 @@ where GPU hardware isn't available or is limiting.  OpenSWR is
 completely CPU-based, and runs on anything from laptops, to
 workstations, to compute nodes in HPC systems.</p>
 
-<p><a href="gallery.html"><img src="jpg/SpaceWeather_SWR.png" width="40%"></a>
+<p style="text-align:center"><a href="gallery.html"><img src="jpg/SpaceWeather_SWR.png" width="40%"></a>
 <a href="gallery.html"><img src="jpg/Wendell_SWR.png" width="40%"></a></p>
 <p style="text-align:center">Click either image for more information</p>
 
 <p>OpenSWR internally builds on top of LLVM, and fully utilizes modern
-instruction sets like Intel<sup>&reg;</sup> SSE, AVX, or AVX2 to achieve high
-rendering performance.</p>
+instruction sets like Intel<sup>&reg;</sup> Streaming SIMD Extensions (SSE), and
+Intel<sup>&reg;</sup> Advanced Vector Extensions (AVX and AVX2) to achieve high
+rendering performance.  The charts below illustrate the compelling advantage of
+OpenSWR over Mesa llvmpipe in a real application.</p>
 
-<p>OpenSWR builds a libGL.so which is a drop-in replacement for the
-systems OpenGL library.  No recompilation of your programs is
-neccessary -- just set LD_LIBRARY_PATH or LD_PRELOAD to point to the
-directory or library and run your program as you normally would.</p>
+<p style="text-align:center"><a href="perf.html"><img src="jpg/OpenSWR_perf_vs_LLVMpipe.png" width="40%"></a></p>
+<p style="text-align:center">Click for more information</p>
 
-<p>We also provide the OSMesa API for offscreen rendering if that
-better suits your needs.  There is one addition to the api, <tt>void
-OSMesaFinishSWR(void)</tt>, which needs to be called to flush
-rendering to the memory buffer.</p>
+<p> We are working on integrating both the SWR core and driver into the Mesa
+project.  This will provide a SWR renderer that supports much of the OpenGL 3.3
+Core and OpenGL 3.0 Compatibility contexts.</p>
 
-        <h3>
-<a id="news" class="anchor" href="#news" aria-hidden="true"><span class="octicon octicon-link"></span></a>Updates</h3>
+<p>As with our original version of OpenSWR, this is a drop-in replacement OpenGL
+library - no recompilation of your programs is necessary.</p>
+
+<h3><a id="news" class="anchor" href="#news" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+    Updates
+</h3>
 
 <dl>
+<dt> Aug 9, 2015</dt>
+<dd>
+<p> Since the release of early alpha, we have been busy integrating our OpenSWR
+core into the Mesa project.  This enables us to take advantage of a very
+mature, very feature complete driver stack that would have been very difficult
+to develop on our own.</p>
+<p> The result is that OpenSWR now has far greater functionality than the OpenGL
+1.4 features available in the first alpha release.</p>
+</dd>
 
 <dt>Dec 12, 2014</dt>
 <dd>
