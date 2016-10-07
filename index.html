@@ -16,7 +16,7 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <a id="forkme_banner" href="https://github.com/openswr/openswr">View on GitHub</a>
+          <a id="mesa_banner" href="https://cgit.freedesktop.org/mesa/mesa/tree/src/gallium/drivers/swr">View source in Mesa</a>
 
           <h1 id="project_title">OpenSWR</h1>
           <h2 id="project_tagline">A High Performance, Highly Scalable Software Rasterizer for OpenGL</h2>
@@ -55,12 +55,32 @@ OpenSWR over Mesa llvmpipe in a real application.</p>
 <p style="text-align:center"><a href="perf.html"><img src="jpg/OpenSWR_perf_vs_llvmpipe.png" width="40%"></a></p>
 <p style="text-align:center">Click for more information</p>
 
-<p> We are working on integrating both the SWR core and driver into the Mesa
-project.  This will provide a SWR renderer that supports much of the OpenGL 3.3
-Core and OpenGL 3.0 Compatibility contexts.</p>
+<p> OpenSWR is now fully integrated into Mesa and provides an SWR renderer that
+supports much of the OpenGL 3.3 Core and OpenGL 3.0 Compatibility contexts.  
+Standard Mesa environment variables provide the ability to run-time switch
+between OpenSWR and llvmpipe software renderers.</p>
 
-<p>As with our original version of OpenSWR, this is a drop-in replacement OpenGL
-library - no recompilation of your programs is necessary.</p>
+<strong>
+<p> For more detail, please see the <a href="talks/SC15DevConf-OpenSWR.pdf">"OpenSWR Overview"</a>
+presented at the Intel<sup>&reg;</sup> HPC Developers Conference at SC15.</p>
+</strong>
+
+<p>
+<strong>
+How to build Mesa with OpenSWR:  
+</strong>
+<br>
+On Linux, OpenSWR is built using the standard autoconf package as described <a href="http://www.mesa3d.org/install.html">here</a>,
+with the addition of "swr" to the list of gallium drivers.
+<table>
+Example:
+<br>
+./configure --disable-dri --disable-egl --enable-xlib-glx --with-gallium-drivers=swrast,swr
+</table>
+Windows builds using SCons are forthcoming.
+</p>
+
+<hr>
 
 <h3><a id="news" class="anchor" href="#news" aria-hidden="true"><span class="octicon octicon-link"></span></a>
     Updates
@@ -137,7 +157,7 @@ We will be posting the slides of this talk as soon as the event is over.
       <footer class="inner">
         <p class="copyright">OpenSWR maintained by <a href="https://github.com/OpenSWR">OpenSWR</a>
 		<br>For information about compiler optimizations, see our <a href="https://software.intel.com/en-us/articles/optimization-notice#opt-en">Optimization Notice</a>.
-		<br>&copy;2009-2015 Intel Corporation</p>
+		<br>&copy;2009-2016 Intel Corporation</p>
       </footer>
     </div>
 
