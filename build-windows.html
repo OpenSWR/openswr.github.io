@@ -1,0 +1,146 @@
+
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="OpenSWR : A High Performance, Highly Scalable software OpenGL implementation">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>OpenSWR</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="mesa_banner" href="https://cgit.freedesktop.org/mesa/mesa/tree/src/gallium/drivers/swr">View source in Mesa</a>
+
+          <h1 id="project_title">OpenSWR</h1>
+          <h2 id="project_tagline">Windows Build Instructions</h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+
+      <p>
+On Windows, OpenSWR is built using the scons package.
+Mesa windows build instructions are included
+<a href="http://www.mesa3d.org/install.html">here</a>.
+OpenSWR also requires LLVM versions greater than 3.9.0 to build.
+
+      <p>
+The instructions below describe how to build Mesa with OpenSWR support
+
+<h3>Download and Build LLVM</h3>
+
+Please refer to the LLVM Windows build instructions with Visual Studio
+for a general overview, located
+<a href="http://llvm.org/docs/GettingStartedVS.html">here</a>
+
+<p>
+  Use <strong>cmake</strong> to generate MSVC .sln files, as follows:
+
+<pre>
+<code style=display:inline-table;background-color:MidnightBlue;color:yellow>
+cmake -DCMAKE_GENERATOR_PLATFORM=x64 -DLLVM_TARGETS_TO_BUILD=X86 -DLLVM_ENABLE_RTTI=1 -DLLVM_USE_CRT_DEBUG=MTd -DLLVM_USE_CRT_RELEASE=MT -DLLVM_ENABLE_TERMINFO=OFF -DCMAKE_INSTALL_PREFIX=c:\my\llvm\root c:\my\llvm\src
+</code>
+</pre>
+
+<p>
+  Note that, in theory, you only need to use one of LLVM_USE_CRT_DEBUG
+  or LLVM_USE_CRT_RELEASE, depending on whether you are building Debug
+  or Release, but it doesn't hurt to always include both in the cmake line.
+
+<p>
+  The mesa windows scons build has the peculiarity that you cannot
+  mix debug and release versions of libs (see link error LNK2038).
+  If you are planning of building both version of mesa,
+  you should also build both versions of LLVM.
+  Below, I am assuming that we are building both.
+
+<p>
+  Build both flavors of LLVM using:
+
+<pre>
+<code style=display:inline-table;background-color:MidnightBlue;color:yellow>
+cd c:\my\llvm\build-debug
+cmake -DCMAKE_GENERATOR_PLATFORM=x64 -DLLVM_TARGETS_TO_BUILD=X86 -DLLVM_ENABLE_RTTI=1 -DLLVM_USE_CRT_DEBUG=MTd -DLLVM_USE_CRT_RELEASE=MT -DLLVM_ENABLE_TERMINFO=OFF -DCMAKE_INSTALL_PREFIX=c:\my\llvm\root-debug c:\my\llvm\src
+cmake --build . --config Debug
+cmake --build . --config Debug --target install
+
+cd c:\my\llvm\build-release
+cmake -DCMAKE_GENERATOR_PLATFORM=x64 -DLLVM_TARGETS_TO_BUILD=X86 -DLLVM_ENABLE_RTTI=1 -DLLVM_USE_CRT_DEBUG=MTd -DLLVM_USE_CRT_RELEASE=MT -DLLVM_ENABLE_TERMINFO=OFF -DCMAKE_INSTALL_PREFIX=c:\my\llvm\root-release c:\my\llvm\src
+cmake --build . --config Release
+cmake --build . --config Release --target install
+</code>
+</pre>
+
+<p>
+  The results are located in the appopriate root directory.
+
+<h3>Build Mesa with OpenSWR</h3>
+
+First, clone the mesa repo.
+
+<p>
+  For debug builds:
+
+<pre>
+<code style=display:inline-table;background-color:MidnightBlue;color:yellow>
+  set LLVM=c:\my\llvm\root-debug
+  scons swr=1 libgl=gdi
+</code>
+</pre>
+
+<p>
+  For release builds:
+  
+
+<pre>
+<code style=display:inline-table;background-color:MidnightBlue;color:yellow>
+  set LLVM=c:\my\llvm\root-release
+  scons swr=1 libgl=gdi
+</code>
+</pre>
+
+<p>
+  Note that you have to modify the LLVM environment variable between
+  debug and release builds.
+
+<p>
+  The build results in 3 .dll files:
+  <strong>opengl32.dll</strong>,
+  <strong>swrAVX.dll</strong> and
+  <strong>swrAVX2.dll</strong>.
+  <strong>opengl32.dll</strong> is located in
+  <strong>build\windows-x86_64\gallium\targets\libgl-gdi</strong>,
+  and the SWR libraries are located in
+  <strong>build\windows-x86_64\gallium\drivers\swr</strong>.
+  Place them either in <strong>c:\windows\system32</strong>
+  (making sure that you keep a backup of the original <strong>opengl32.dll</strong>),
+  or in your current directory (if you are running simple command-line tests). 
+
+<p>
+  Please modify your paths accordingly if you are running debug builds.
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">OpenSWR maintained by <a href="https://github.com/OpenSWR">OpenSWR</a>
+		<br>For information about compiler optimizations, see our <a href="https://software.intel.com/en-us/articles/optimization-notice#opt-en">Optimization Notice</a>.
+		<br>&copy;2009-2016 Intel Corporation</p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
