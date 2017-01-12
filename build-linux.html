@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="OpenSWR : A High Performance, Highly Scalable software OpenGL implementation">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>OpenSWR</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="mesa_banner" href="https://cgit.freedesktop.org/mesa/mesa/tree/src/gallium/drivers/swr">View source in Mesa</a>
+
+          <h1 id="project_title">OpenSWR</h1>
+          <h2 id="project_tagline">A High Performance, Highly Scalable Software Rasterizer for OpenGL</h2>
+
+            <section id="contact">
+                For more information please <a href="mailto:openswr@googlegroups.com">send us an email</a>.
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+
+      <h2>Linux Build Instructions</h2>
+      <p>
+On Linux, OpenSWR is built using the standard autoconf package as described <a href="http://www.mesa3d.org/install.html">here</a>,
+with the addition of "swr" to the list of gallium drivers.
+Mesa requires some additional packages to build.  Please follow the Mesa
+instructions and make sure you install them.
+One of the major Mesa requirements is LLVM, but with some additional
+flags required.
+      <p>
+Below is a set of instructions for building both LLVM and Mesa,
+with OpenSWR support.
+
+<pre>
+<code style=display:inline-table;background-color:MidnightBlue;color:yellow>
+  mkdir llvm
+  cd llvm
+  tar xfJ /path/to/llvm-x.y.z.src.tar.xz
+  mkdir build root
+  cd build
+  cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DLLVM_TARGETS_TO_BUILD=X86 -DBUILD_SHARED_LIBS=1 -DLLVM_ENABLE_RTTI=1 -DCMAKE_INSTALL_PREFIX=$PWD/../root  ../llvm-x.y.z.src
+  make -j10
+  make install
+  cd ..
+  export PATH=$PATH:$PWD/root/bin
+  export LD_LIBRARY_PATH=$PWD/root/lib
+  cd ..
+  mkdir build
+  cd build
+  ../autogen.sh --disable-dri --disable-egl --disable-gbm --with-gallium-drivers=swrast,swr
+  make -j10
+</code>
+</pre>
+
+<p>
+Please feel free to modify the above instructions to fit your needs.
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">OpenSWR maintained by <a href="https://github.com/OpenSWR">OpenSWR</a>
+		<br>For information about compiler optimizations, see our <a href="https://software.intel.com/en-us/articles/optimization-notice#opt-en">Optimization Notice</a>.
+		<br>&copy;2009-2016 Intel Corporation</p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
