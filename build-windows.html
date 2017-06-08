@@ -45,6 +45,10 @@ The instructions below describe how to build Mesa with OpenSWR support
 
 <h3>Download and Build LLVM</h3>
 
+Follow these instructions if you don't have llvm built and installed
+in your system.
+<p>
+
 Please refer to the LLVM Windows build instructions with Visual Studio
 for a general overview, located
 <a href="http://llvm.org/docs/GettingStartedVS.html">here</a>
@@ -130,7 +134,21 @@ First, clone the mesa repo.
   <strong>build\windows-x86_64\gallium\drivers\swr</strong>.
   Place them either in <strong>c:\windows\system32</strong>
   (making sure that you keep a backup of the original <strong>opengl32.dll</strong>),
-  or in your current directory (if you are running simple command-line tests). 
+  or in your current directory (if you are running simple command-line tests).
+
+<p>
+  If you need to compile OSMesa on windows, just add <code>osmesa</code>
+  to the scons build line, as follows (example for release build):
+
+<pre>
+<code style=display:inline-table;background-color:MidnightBlue;color:yellow>
+  scons swr=1 libgl-gdi osmesa build=release
+</code>
+</pre>
+
+The osmesa libraries will be found under the
+<strong>build\windows-x86_64\gallium\targets\osmesa</strong>
+directory.
 
 <p>
   Please modify your paths accordingly if you are running debug builds.
