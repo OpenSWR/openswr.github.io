@@ -32,18 +32,41 @@
     <div id="main_content_wrap" class="outer">
     <section id="main_content" class="inner">
 
-      <h2>Linux Build Instructions</h2>
-      <p>
-On Linux, OpenSWR is built using the standard autoconf package as described <a href="http://www.mesa3d.org/install.html">here</a>,
-with the addition of "swr" to the list of gallium drivers.
-Mesa requires some additional packages to build.  Please follow the Mesa
-instructions and make sure you install them.
-One of the major Mesa requirements is LLVM, but with some additional
-flags required.
-      <p>
-Below is a set of instructions for building both LLVM and Mesa,
-with OpenSWR support.
-
+<h2>Linux Build Instructions</h2>
+<p>
+  On Linux, OpenSWR is built using the standard autoconf package
+  as described <a href="http://www.mesa3d.org/install.html">here</a>,
+  with the addition of "swr" to the list of gallium drivers.
+  Mesa requires some additional packages to build.  Please follow the Mesa
+  instructions and make sure you install them.
+  One of the major Mesa requirements is LLVM, but with some additional
+  flags required.
+<p>
+  The instructions below describe how to compile Mesa using the
+  Mesa released tarballs.
+  Compiling directly from the git repository is more complicated
+  and is beyond the scope of these instructions.
+  If you want to compile from the git repository and you have problems,
+  please contact us directly.
+<p>
+<h5>Instructions</h5>
+<li>
+  Download and unpack mesa.
+  Please follow the instructions in
+  <a href=http://www.mesa3d.org/download.html>
+    http://www.mesa3d.org/download.html
+  </a>
+<li>
+  cd into the directory you just extracted. (the root of the mesa distribution)
+<li>
+  Optional: If you don't have llvm installed,
+  follow the steps below to install llvm,
+  after you've downloaded it from the
+  <a href="http://www.llvm.org">
+    llvm website
+  </a>.
+  Please complete the <code>make</code> command
+  with the correct <code>-j</code> parameter for your system
 <pre>
 <code style=display:inline-table;background-color:MidnightBlue;color:yellow>
   mkdir llvm
@@ -55,18 +78,52 @@ with OpenSWR support.
   make -j10
   make install
   cd ..
+  # Allow the mesa build to locate llvm
   export PATH=$PATH:$PWD/root/bin
   export LD_LIBRARY_PATH=$PWD/root/lib
   cd ..
-  mkdir build
-  cd build
-  ../autogen.sh --disable-dri --disable-egl --disable-gbm --with-gallium-drivers=swrast,swr
+</code>
+</pre>
+
+<li>
+  Configure the mesa build with OpenSWR
+
+<pre>
+<code style=display:inline-table;background-color:MidnightBlue;color:yellow>
+  ../configure --disable-dri --disable-egl --disable-gbm --with-gallium-drivers=swrast,swr --with-platforms=x11
+</code>
+</pre>
+
+If you have VL in your system, you will need to also pass the following flags:
+
+<pre>
+<code style=display:inline-table;background-color:MidnightBlue;color:yellow>
+  --disable-xvmc --disable-vdpau --disable-omx --disable-va
+</code>
+</pre>
+
+If you want to compile OSMesa, please add the following flags:
+
+<pre>
+<code style=display:inline-table;background-color:MidnightBlue;color:yellow>
+  --enable-gallium-osmesa
+</code>
+</pre>
+<li> Build mesa as follows.  As with the llvm build, pass in the correct <code>-j</code> parameter to <code>make</code> for your system
+
+<pre>
+<code style=display:inline-table;background-color:MidnightBlue;color:yellow>
   make -j10
 </code>
 </pre>
 
+</li>
+
 <p>
-Please feel free to modify the above instructions to fit your needs.
+  The resulting libraries are in the lib/gallium directory.
+
+<p>
+  Please feel free to modify the above instructions to fit your needs.
 
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
