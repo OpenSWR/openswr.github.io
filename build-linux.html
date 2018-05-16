@@ -109,6 +109,18 @@ If you want to compile OSMesa, please add the following flags:
   --enable-gallium-osmesa
 </code>
 </pre>
+
+By default, the build builds for AVX and AVX2 targets.  If you want to
+also compile for Skylake and/or Knight's Landing architectures (AVX512),
+please add the following flags.  Make sure your compiler supports the
+necessery compiler flags to compile for the specified architectures.
+
+<pre>
+<code style=display:inline-table;background-color:MidnightBlue;color:yellow>
+  --with-swr-archs=avx,avx2,skx,knl
+</code>
+</pre>
+
 <li> Build mesa as follows.  As with the llvm build, pass in the correct <code>-j</code> parameter to <code>make</code> for your system
 
 <pre>
@@ -120,7 +132,10 @@ If you want to compile OSMesa, please add the following flags:
 </li>
 
 <p>
-  The resulting libraries are in the lib/gallium directory.
+  The resulting libraries are in the lib/gallium directory.  Also, you'll
+  have to set the <em>GALLIUM_DRIVER=swr</em> environment variable for
+  mesa to use the SWR driver.  If not specified, the default mesa
+  <em>llvmpipe</em> driver will be used.
 
 <p>
   Please feel free to modify the above instructions to fit your needs.
