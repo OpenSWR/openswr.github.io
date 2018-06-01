@@ -2,155 +2,241 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="OpenSWR : A High Performance, Highly Scalable software OpenGL implementation">
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <meta name="description" content="OpenSWR : A High Performance, Highly Scalable software OpenGL implementation">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>OpenSWR</title>
-  </head>
+        <title>OpenSWR</title>
+    </head>
 
-  <body>
+    <body>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="mesa_banner" href="https://cgit.freedesktop.org/mesa/mesa/tree/src/gallium/drivers/swr">View source in Mesa</a>
+        <!-- HEADER -->
+        <div id="header_wrap" class="outer">
+            <header class="inner">
+                <a id="mesa_banner" href="https://cgit.freedesktop.org/mesa/mesa/tree/src/gallium/drivers/swr">View source in Mesa</a>
 
-          <h1 id="project_title">OpenSWR</h1>
-          <h2 id="project_tagline">A High Performance, Highly Scalable Software Rasterizer for OpenGL</h2>
+                <h1 id="project_title">OpenSWR</h1>
+                <h2 id="project_tagline">A High Performance, Highly Scalable Software Rasterizer for OpenGL</h2>
 
-            <section id="contact">
-                For more information please <a href="mailto:openswr@googlegroups.com">send us an email</a>.
-            </section>
-        </header>
-    </div>
+                <section id="contact">
+                    For more information please <a href="mailto:openswr@googlegroups.com">send us an email</a>.
+                </section>
+            </header>
+        </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-    <section id="main_content" class="inner">
+        <!-- MAIN CONTENT -->
+        <div id="main_content_wrap" class="outer">
+            <section id="main_content" class="inner">
 
-<h2>Linux Build Instructions</h2>
-<p>
-  On Linux, OpenSWR is built using the standard autoconf package
-  as described <a href="http://www.mesa3d.org/install.html">here</a>,
-  with the addition of "swr" to the list of gallium drivers.
-  Mesa requires some additional packages to build.  Please follow the Mesa
-  instructions and make sure you install them.
-  One of the major Mesa requirements is LLVM, but with some additional
-  flags required.
-<p>
-  The instructions below describe how to compile Mesa using the
-  Mesa released tarballs.
-  Compiling directly from the git repository is more complicated
-  and is beyond the scope of these instructions.
-  If you want to compile from the git repository and you have problems,
-  please contact us directly.
-<p>
-<h5>Instructions</h5>
-<li>
-  Download and unpack mesa.
-  Please follow the instructions in
-  <a href=http://www.mesa3d.org/download.html>
-    http://www.mesa3d.org/download.html
-  </a>
-<li>
-  cd into the directory you just extracted. (the root of the mesa distribution)
-<li>
-  Optional: If you don't have llvm installed,
-  follow the steps below to install llvm,
-  after you've downloaded it from the
-  <a href="http://www.llvm.org">
-    llvm website
-  </a>.
-  Please complete the <code>make</code> command
-  with the correct <code>-j</code> parameter for your system
-<pre>
-<code style=display:inline-table;background-color:MidnightBlue;color:yellow>
-  mkdir llvm
-  cd llvm
-  tar xfJ /path/to/llvm-x.y.z.src.tar.xz
-  mkdir build root
-  cd build
-  cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DLLVM_TARGETS_TO_BUILD=X86 -DBUILD_SHARED_LIBS=1 -DLLVM_ENABLE_RTTI=1 -DCMAKE_INSTALL_PREFIX=$PWD/../root  ../llvm-x.y.z.src
-  make -j10
-  make install
-  cd ..
-  # Allow the mesa build to locate llvm
-  export PATH=$PATH:$PWD/root/bin
-  export LD_LIBRARY_PATH=$PWD/root/lib
-  cd ..
-</code>
-</pre>
+                <h2>Linux Build Instructions</h2>
 
-<li>
-  Configure the mesa build with OpenSWR
+                <p>
+                    On Linux, OpenSWR is built within Mesa using the standard autoconf package as described in Mesa's
+                    <a href="http://www.mesa3d.org/install.html">installation page</a>, with the addition of "swr" to the
+                    list of gallium drivers.
+                </p>
+                <p>
+                    The instructions below describe how to compile Mesa using the Mesa released tarballs.  Compiling
+                    directly from the git repository is more complex and is beyond the scope of these instructions.  If
+                    you want to compile from the git repository and you run into issues, please contact us directly.
+                </p>
 
-<pre>
-<code style=display:inline-table;background-color:MidnightBlue;color:yellow>
-  ../configure --disable-dri --disable-egl --disable-gbm --with-gallium-drivers=swrast,swr --with-platforms=x11
-</code>
-</pre>
+                <ol class="toc">
+                    <li class="toc"><a href="#setup">Setup</a>
+                        <ol class="toc">
+                            <li class="toc"><a href="#building-llvm">Building and Installing LLVM</a></li>
+                        </ol>
+                    </li>
+                    <li class="toc"><a href="#building-openswr">Building Mesa with OpenSWR</a></li>
+                    <li class="toc"><a href="#using-openswr">Using Mesa with OpenSWR</a></li>
+                </ol>
 
-If you have VL in your system, you will need to also pass the following flags:
+                <a name="setup"><h3>Setup</h3></a>
 
-<pre>
-<code style=display:inline-table;background-color:MidnightBlue;color:yellow>
-  --disable-xvmc --disable-vdpau --disable-omx --disable-va
-</code>
-</pre>
+                <p>
+                    Mesa requires some dependencies to build:
+                </p>
 
-If you want to compile OSMesa, please add the following flags:
+                <ul>
+                    <li><code>libtool-bin</code></li>
+                    <li><code>autoconf</code></li>
+                    <li><code>python-pip</code></li>
+                    <li><code>libx11-dev</code></li>
+                    <li><code>libxext-dev</code></li>
+                    <li><code>x11proto-core-dev</code></li>
+                    <li><code>x11proto-gl-dev</code></li>
+                    <li><code>libglew-dev</code></li>
+                    <li><code>freeglut3-dev</code></li>
+                    <li><code>bison</code></li>
+                    <li><code>flex</code></li>
+                </ul>
 
-<pre>
-<code style=display:inline-table;background-color:MidnightBlue;color:yellow>
-  --enable-gallium-osmesa
-</code>
-</pre>
+                <p>
+                as well as the following two Python modules installed via <code>pip</code>:
+                </p>
+                <ul>
+                    <li><code>mako</code></li>
+                    <li><code>lxml</code></li>
+                </ul>
 
-By default, the build builds for AVX and AVX2 targets.  If you want to
-also compile for Skylake and/or Knight's Landing architectures (AVX512),
-please add the following flags.  Make sure your compiler supports the
-necessery compiler flags to compile for the specified architectures.
+                <p>
+                Please
+                make sure you install them prior to building.
+                </p>
 
-<pre>
-<code style=display:inline-table;background-color:MidnightBlue;color:yellow>
-  --with-swr-archs=avx,avx2,skx,knl
-</code>
-</pre>
+                <a name="building-llvm"><h4>Building and Installing LLVM</h4></a>
+                <p>
+                One of the major Mesa requirements is LLVM, but with some additional
+                flags required at compile time. If you do not already have LLVM, you will need to install it first.
+                LLVM source is available as tarball on their <a href="http://releases.llvm.org/">release download page</a>.
+                Once downloaded, use the following steps to build and install LLVM. In this example we are installing them locally.
+                </p>
+                <pre>
+$ pwd
+/home/openswr/llvm
+$ ls
+llvm-x.y.z.src.tar.xz
+$ tar xJf llvm-x.y.z.src.tar.xz
+$ mkdir build
+$ cd build
+$ cmake -G "Unix Makefiles"
+        -D CMAKE_BUILD_TYPE=Release \
+        -D LLVM_TARGETS_TO_BUILD=X86 \
+        -D BUILD_SHARED_LIBS=1 \
+        -D LLVM_ENABLE_RTTI=1 \
+        -D CMAKE_INSTALL_PREFIX=/home/openswr/.local/ \
+        ../llvm-x.y.z.src
+$ make -j `nproc`
+$ make install
+                </pre>
 
-<li> Build mesa as follows.  As with the llvm build, pass in the correct <code>-j</code> parameter to <code>make</code> for your system
 
-<pre>
-<code style=display:inline-table;background-color:MidnightBlue;color:yellow>
-  make -j10
-</code>
-</pre>
+                <a name="building-openswr"><h3>Building Mesa with OpenSWR</h3></a>
 
-</li>
+                <p>
+                Download a Mesa source distribution from Mesa's <a href="http://www.mesa3d.org/download.html">download page</a>.
+                We recommend the latest non-release-candidate version for the best compatibility.
+                </p>
 
-<p>
-  The resulting libraries are in the lib/gallium directory.  Also, you'll
-  have to set the <em>GALLIUM_DRIVER=swr</em> environment variable for
-  mesa to use the SWR driver.  If not specified, the default mesa
-  <em>llvmpipe</em> driver will be used.
+                <p>
+                Once downloaded, use the following steps to build Mesa with OpenSWR.
 
-<p>
-  Please feel free to modify the above instructions to fit your needs.
+                <pre>
+$ pwd
+/home/openswr/mesa
+$ ls
+mesa-x.y.z.tar.gz
+$ tar xf mesa-x.y.z.tar.gz
+$ cd mesa-x.y.z
+$ mkdir build
+$ cd build
+                </pre>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">OpenSWR maintained by <a href="https://github.com/OpenSWR">OpenSWR</a>
-		<br>For information about compiler optimizations, see our <a href="https://software.intel.com/en-us/articles/optimization-notice#opt-en">Optimization Notice</a>.
-		<br>&copy;2009-2018 Intel Corporation
-		<br><a href="https://www.intel.com/privacy">Privacy</a></p>
-      </footer>
-    </div>
+                <p>
+                Now we can configure Mesa with OpenSWR - note the addition of <code>swr</code> as a gallium driver.
+                In this example, we are installing Mesa locally.
+                </p>
 
-    
+                <pre>
+$ ../configure --disable-dri \
+               --disable-egl \
+               --disable-gbm \
+               --with-gallium-drivers=swrast,swr \
+               --with-platforms=x11 \
+               --prefix=/home/openswr/.local
+                </pre>
 
-  </body>
+                <p>
+                If you run into problems due to VL on your system, add the following flags to the above <code>configure</code> call:
+                </p>
+
+                <pre>
+--disable-xvmc --disable-vdpau --disable-omx --disable-va
+                </pre>
+
+                <p>
+                If you also want to compile OSMesa (off-screen rendering support), please add the following flag:
+                </p>
+
+                <pre>
+--enable-gallium-osmesa
+                </pre>
+
+                <p>
+                By default, the build will compile with support for AVX and AVX2 targets.  If you want to
+                also compile for Skylake and/or Knight's Landing architectures (AVX512),
+                please add the following flag. Make sure your compiler supports the
+                necessary compiler flags to compile for the specified architectures.
+                </p>
+
+                <pre>
+--with-swr-archs=avx,avx2,skx,knl
+                </pre>
+
+                <p>
+                After you have the appropriate <code>configure</code> command for your system, you can build and install with
+                <code>make</code>
+                </p>
+
+                <pre>
+$ make -j `nproc`
+$ make install
+                </pre>
+
+                <p>
+                Once installed, you will see <code>libGL.so</code>, <code>libOSMesa.so</code>, and <code>libSWR&lt;arch&gt;.so</code>
+                (for each architecture selected) in <code>lib/gallium/</code> in your build directory as well as in <code>lib/</code> in
+                your installation directory.
+                </p>
+
+                <a name="using-openswr"><h3>Using Mesa with OpenSWR</h3></a>
+
+                <p>
+                If you installed Mesa with OpenSWR to a local directory as in the examples above, it should already be usable by
+                applications. If you installed elsewhere, you will need to include the path in your <code>LD_LIBRARY_PATH</code>
+                environment variable. Make sure you specifically add the <code>lib</code> or <code>lib/gallium</code> directory to
+                <code>LD_LIBRARY_PATH</code>.
+                </p>
+
+                <pre>
+$ export LD_LIBRARY_PATH=/some/path/to/mesa/lib:$LD_LIBRARY_PATH
+                </pre>
+
+                <p>
+                Now any application seeking GL will use the Mesa installation. To enable the OpenSWR driver, you need to specify it with
+                the <code>GALLIUM_DRIVER</code> environment variable:
+                </p>
+
+                <pre>
+$ export GALLIUM_DRIVER=swr
+                </pre>
+
+                <p>
+                You should see a message printed to the terminal when running a GL application when OpenSWR is set as the gallium
+                driver. For example:
+                </p>
+
+                <pre>
+$ glxgears
+SWR detected AVX2 instruction support (using: libswrAVX2.so).
+                </pre>
+                <br>
+
+                <!-- FOOTER  -->
+                <div id="footer_wrap" class="outer">
+                    <footer class="inner">
+                        <p class="copyright">OpenSWR maintained by <a href="https://github.com/OpenSWR">OpenSWR</a>
+                        <br>For information about compiler optimizations, see our <a href="https://software.intel.com/en-us/articles/optimization-notice#opt-en">Optimization Notice</a>.
+                        <br>&copy;2009-2018 Intel Corporation
+                        <br><a href="https://www.intel.com/privacy">Privacy</a></p>
+                    </footer>
+                </div>
+
+
+
+    </body>
 </html>
