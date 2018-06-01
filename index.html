@@ -31,12 +31,12 @@
         <!-- MAIN CONTENT -->
         <div id="main_content_wrap" class="outer">
             <section id="main_content" class="inner">
-                <h3>
+                <h2>
                     <a id="intro" class="anchor" href="#wintro" aria-hidden="true">
                         <span class="octicon octicon-link"></span>
                     </a>
                     Overview
-                </h3>
+                </h2>
 
                 <p>
                     OpenSWR provides a high performance, highly scalable OpenGL-compatible software rasterizer that
@@ -70,93 +70,98 @@
                     presented at the Intel<sup>&reg;</sup> HPC Developers Conference at SC15.
                 </strong>
 
-                <hr>
-                <p>
-                <h5>
-                    How to build Mesa with OpenSWR:
-                </h5>
-                <br>
+                <h2>
+                    Building Mesa with OpenSWR
+                </h2>
                 Please follow instructions for <a href="build-linux.html">Linux</a> or <a href="build-windows.html">Windows</a>.
-                </p>
 
-                <hr>
-
-                <h3><a id="news" class="anchor" href="#news" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+                <h2><a id="news" class="anchor" href="#news" aria-hidden="true"><span class="octicon octicon-link"></span></a>
                     Updates
-                </h3>
+                </h2>
 
                 <dl>
                     <dt>March 27, 2018</dt>
                     <dd>
-                    <a href="http://mesa3d.org/">Mesa 18.0.0</a> has been released with support for SKX and KNL architectures in OpenSWR.
+                        <a href="http://mesa3d.org/">Mesa 18.0.0</a> has been released with support for SKX and KNL
+                        architectures in OpenSWR.
                     </dd>
 
                     <dt>January 30, 2017</dt>
                     <dd>
-                    Added Windows build instructions, and moved instructions for both Linux and Windows to their own page.</p>
+                        Added Windows build instructions, and moved instructions for both Linux and Windows to their own
+                        page.
                     </dd>
 
                     <dt>July 8, 2016</dt>
                     <dd>
-                    <a href="http://mesa3d.org/">Mesa 12.0</a> has been released and contains OpenSWR as an optional driver.  Development work on OpenSWR is now done on the mesa git master repository.
+                        <a href="http://mesa3d.org/">Mesa 12.0</a> has been released and contains OpenSWR as an optional
+                        driver.  Development work on OpenSWR is now done on the mesa git master repository.
                     </dd>
 
                     <dt>Oct 19, 2015</dt>
                     <dd>
-                    Our initial public version of our Mesa+SWR integration work is now available from <a href="https://github.com/OpenSWR/openswr-mesa">https://github.com/OpenSWR/openswr-mesa</a>.
+                        Our initial public version of our Mesa+SWR integration work is now available from <a
+                        href="https://github.com/OpenSWR/openswr-mesa">https://github.com/OpenSWR/openswr-mesa</a>.
                     </dd>
 
                     <dt>Aug 9, 2015</dt>
                     <dd>
-                    Since the release of early alpha, we have been busy integrating our OpenSWR
-                    core into the Mesa project.  This enables us to take advantage of a very
-                    mature, very feature complete driver stack that would have been very difficult
-                    to develop on our own.
-                    The result is that OpenSWR now has far greater functionality than the OpenGL
-                    1.4 features available in the first alpha release.
+                        <p>
+                            Since the release of early alpha, we have been busy integrating our OpenSWR core into the
+                            Mesa project.  This enables us to take advantage of a very mature, very feature complete
+                            driver stack that would have been very difficult to develop on our own.
+                        </p>
+                        <p>
+                            The result is that OpenSWR now has far greater functionality than the OpenGL 1.4 features
+                            available in the first alpha release.
+                        </p>
                     </dd>
 
                     <dt>Dec 12, 2014</dt>
                     <dd>
-                    ALPHA release.  This version is the first to be released to the public.  Please bear
-                    with us if there are build or functionality issues.  The major
-                    applications used for testing were ParaView and VisIt - if you are
-                    trying another program you may encounter missing features.
-
-                    This version is coming out as we are working on some major cleanups to
-                    the code.  In order to keep our commitment to release this to the
-                    community and to provide a well-tested version, we are releasing the
-                    code that was used for the SC14 demonstrations.  The next major
-                    release will contain the cleanups.
-
-                    The source code can be downloaded from here:
-                    <ul>
-                        <li><a href="https://github.com/OpenSWR/openswr/archive/v0.1.tar.gz">v0.1.tar.gz</a>
-                            <li><a href="https://github.com/OpenSWR/openswr/archive/v0.1.tar.gz">v0.1.zip</a>
-                    </ul>
+                        <p>
+                            ALPHA release.  This version is the first to be released to the public.  Please bear with us
+                            if there are build or functionality issues.  The major applications used for testing were
+                            ParaView and VisIt - if you are trying another program you may encounter missing features.
+                        </p>
+                        <p>
+                            This version is coming out as we are working on some major cleanups to the code.  In order
+                            to keep our commitment to release this to the community and to provide a well-tested
+                            version, we are releasing the code that was used for the SC14 demonstrations.  The next
+                            major release will contain the cleanups.
+                        </p>
+                        <p>
+                            The source code can be downloaded here:
+                            <ul>
+                                <li><a href="https://github.com/OpenSWR/openswr/archive/v0.1.tar.gz">v0.1.tar.gz</a>
+                                <li><a href="https://github.com/OpenSWR/openswr/archive/v0.1.tar.gz">v0.1.zip</a>
+                            </ul>
+                        </p>
                     </dd>
 
                     <dt>Dec 8, 2014</dt>
                     <dd>
-                    The slides for our OpenSWR-related talks at SC14 are now available:
-                    <ul>
-                        <li>
-                            <a href="talks/SC14DevConf-SWR.pdf">"Software Rasterizer (SWR)"</a> (presented at the Intel HPC Developers Conference at SC14)
-                        </li>
-                        <li>
-                            <a href="http://www.ospray.org/download/talks/UltraVis14-HiFiVis-compressed.pdf">"High-Fidelity Visualization"</a> (presented at UltraVis 2014)
-                        </li>
-                    </ul>
+                        The slides for our OpenSWR-related talks at SC14 are now available:
+                        <ul>
+                            <li>
+                                <a href="talks/SC14DevConf-SWR.pdf">"Software Rasterizer (SWR)"</a> (presented at the
+                                Intel HPC Developers Conference at SC14)
+                            </li>
+                            <li>
+                                <a href="http://www.ospray.org/download/talks/UltraVis14-HiFiVis-compressed.pdf">
+                                    "High-Fidelity Visualization"</a> (presented at UltraVis 2014)
+                            </li>
+                        </ul>
                     </dd>
 
                     <dt>Nov 13, 2014</dt>
                     <dd>
-
-                    There is an upcoming talk on OpenSWR at Supercomputing 2014:
-                    <ul>
-                        <li>At the "Visualization" track of the <a href="http://ihpcc2014.com/dw-visual.html">Intel<sup>&reg;</sup> HPC Developer Conference (Nov 16, 2014)</a></li>
-                    </ul>
-                    We will be posting the slides of this talk as soon as the event is over.
+                        There is an upcoming talk on OpenSWR at Supercomputing 2014:
+                        <ul>
+                            <li>At the "Visualization" track of the <a href="http://ihpcc2014.com/dw-visual.html">
+                                    Intel<sup>&reg;</sup> HPC Developer Conference (Nov 16, 2014)</a></li>
+                        </ul>
+                        We will be posting the slides of this talk as soon as the event is over.
                     </dd>
                 </dl>
 
