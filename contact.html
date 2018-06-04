@@ -30,8 +30,8 @@
                         <li class="navbar"><a href="index.html">Overview</a></li>
                         <li class="navbar"><a href="index.html#build">Build</a></li>
                         <li class="navbar"><a href="gallery.html">Gallery</a></li>
-                        <li class="navbar active"><a href="perf.html">Performance</a></li>
-                        <li class="navbar" style="float:right"><a href="contact.html">Contact</a></li>
+                        <li class="navbar"><a href="perf.html">Performance</a></li>
+                        <li class="navbar active" style="float:right"><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
         </header>
@@ -41,36 +41,24 @@
     <div id="main_content_wrap" class="outer">
         <section id="main_content" class="inner">
             <h3><a id="intro" class="anchor" href="#wintro" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-                Paraview and OpenSWR
+                OpenSWR Contact
             </h3>
 
-<p>Here is a case study of ParaView, comparing OpenSWR performance to that of
-the Mesa llvmpipe.</p>
+            <p>
+            To contact us, please send us an email at <a href="mailto:openswr@googlegroups.com">openswr@googlegroups.com</a>.
+            </p>
 
-<a href="jpg/OpenSWR_perf_vs_llvmpipe.png"><img src="jpg/OpenSWR_perf_vs_llvmpipe.png" width="95%"></a>
+            <p>
+            If you have problems running Mesa with OpenSWR, please use the
+            <a href="https://bugs.freedesktop.org/enter_bug.cgi?product=Mesa">Mesa bug tracker on Bugzilla</a>.
+            Be sure to specify Drivers/Gallium/swr as the component.
+            </p>
 
-<p> In the top graph, OpenSWR outperforms llvmpipe by 29x in a scene with 2.9
-million triangles and 51x when the geometry is increased to 106.2
-million triangles.  </p>
-
-<p> The bottom graph illustrates how OpenSWR performance scales with the number of
-cores used for rendering.  </p>
-
-System configuration:
-<ul>
-    <li>Intel<sup>&reg;</sup> Xeon<sup>&reg;</sup> E5-2699 v3 Processor, 2 x 18 cores, 2.3GHz
-    <li>ParaView 4.3.1 (unmodified, latest released version)</li>
-    <li>Mesa 10.5.1
-    <li>OpenSWR "alpha 2"
-    <li>TACC Isotropic turbulence data sets
-    <ul>
-        <li>Volumes ranging from 256<sup>3</sup> to 1280<sup>3</sup></li>
-        <li>Isosurface + slice extracted from each volume producing geometries 2.9M to 106.2M triangles</li>
-        <li>Model courtesy of the Texas Advanced Computing Center (TACC)
-    </ul>
-</ul>
-
-    </section>
+            <p>
+            Please note that OpenSWR primarily targets CPU-based rasterization for visualization purposes, not for
+            games. We suggest using other Mesa gallium drivers for games.
+            </p>
+        </section>
     </div>
 
     <!-- FOOTER  -->

@@ -1,172 +1,208 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="OpenSWR : A High Performance, Highly Scalable software OpenGL implementation">
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <meta name="description" content="OpenSWR : A High Performance, Highly Scalable software OpenGL implementation">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>OpenSWR</title>
-  </head>
+        <title>OpenSWR</title>
+    </head>
 
-  <body>
+    <body>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="mesa_banner" href="https://cgit.freedesktop.org/mesa/mesa/tree/src/gallium/drivers/swr">View source in Mesa</a>
+        <!-- HEADER -->
+        <div id="header_wrap" class="outer">
+            <header class="inner">
+                <a id="mesa_banner" href="https://cgit.freedesktop.org/mesa/mesa/tree/src/gallium/drivers/swr">View source in Mesa</a>
 
-          <h1 id="project_title">OpenSWR</h1>
-          <h2 id="project_tagline">A High Performance, Highly Scalable Software Rasterizer for OpenGL</h2>
+                <a href="index.html">
+                    <h1 id="project_title">OpenSWR</h1>
+                </a>
+                <a href="index.html">
+                    <h2 id="project_tagline">A High Performance, Highly Scalable Software Rasterizer for OpenGL</h2>
+                </a>
 
-            <section id="contact">
-                For more information please <a href="mailto:openswr@googlegroups.com">send us an email</a>.
-            </section>
+                <!--
+                <section id="contact">
+                    For more information please <a href="mailto:openswr@googlegroups.com">send us an email</a>.
+                </section>
+                -->
 
-        </header>
-    </div>
+                <nav>
+                    <ul class="navbar">
+                        <li class="navbar active"><a href="index.html">Overview</a></li>
+                        <li class="navbar"><a href="#build">Build</a></li>
+                        <li class="navbar"><a href="gallery.html">Gallery</a></li>
+                        <li class="navbar"><a href="perf.html">Performance</a></li>
+                        <li class="navbar" style="float:right"><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-    <section id="main_content" class="inner">
-        <h3><a id="intro" class="anchor" href="#wintro" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-            Overview
-        </h3>
+        <!-- MAIN CONTENT -->
+        <div id="main_content_wrap" class="outer">
+            <section id="main_content" class="inner">
+                <h2>
+                    <a id="intro" class="anchor" href="#wintro" aria-hidden="true">
+                        <span class="octicon octicon-link"></span>
+                    </a>
+                    Overview
+                </h2>
 
-<p>OpenSWR provides a high performance, highly
-scalable OpenGL-compatible software rasterizer that allows use of
-unmodified visualization software.  This allows working with datasets
-when GPU hardware isn't available or is limiting.  OpenSWR is
-completely CPU-based, and runs on anything from laptops to
-workstations to compute nodes in HPC systems.</p>
+                <p>
+                    OpenSWR provides a high performance, highly scalable OpenGL-compatible software rasterizer that
+                    allows use of unmodified visualization software.  This allows working with datasets when GPU
+                    hardware isn't available or is limiting.  OpenSWR is completely CPU-based, and runs on anything from
+                    laptops to workstations to compute nodes in HPC systems.
+                </p>
 
-<p style="text-align:center"><a href="gallery.html"><img src="jpg/SpaceWeather_SWR.png" width="40%"></a>
-<a href="gallery.html"><img src="jpg/Wendell_SWR.png" width="40%"></a></p>
-<p style="text-align:center">Click either image for more information</p>
+                <p style="text-align:center"><a href="gallery.html"><img src="jpg/SpaceWeather_SWR.png" width="40%"></a>
+                <a href="gallery.html"><img src="jpg/Wendell_SWR.png" width="40%"></a></p>
+                <p style="text-align:center">Click either image for more information</p>
 
-<p>OpenSWR internally builds on top of LLVM, and fully utilizes modern
-instruction sets like 
-Intel<sup>&reg;</sup> Advanced Vector Extensions (AVX, AVX2, and AVX512) to achieve high
-rendering performance.  The charts below illustrate the compelling advantage of
-OpenSWR over Mesa llvmpipe in a real application scenario.</p>
+                <p>
+                    OpenSWR internally builds on top of LLVM, and fully utilizes modern instruction sets like
+                    Intel<sup>&reg;</sup> Advanced Vector Extensions (AVX, AVX2, and AVX512) to achieve high rendering
+                    performance.  The charts below illustrate the compelling advantage of OpenSWR over Mesa llvmpipe in
+                    a real application scenario.
+                </p>
 
-<p style="text-align:center"><a href="perf.html"><img src="jpg/OpenSWR_perf_vs_llvmpipe.png" width="40%"></a></p>
-<p style="text-align:center">Click for more information</p>
+                <p style="text-align:center"><a href="perf.html"><img src="jpg/OpenSWR_perf_vs_llvmpipe.png" width="40%"></a></p>
+                <p style="text-align:center">Click for more information</p>
 
-<p> OpenSWR is now fully integrated into Mesa and provides a SWR renderer that
-supports much of the OpenGL 3.3 Core and OpenGL 3.0 Compatibility contexts.  
-Standard Mesa environment variables provide the ability to run-time switch
-between OpenSWR and llvmpipe software renderers.</p>
+                <p>
+                    OpenSWR is now fully integrated into Mesa and provides a SWR renderer that supports much of the
+                    OpenGL 3.3 Core and OpenGL 3.0 Compatibility contexts.  Standard Mesa environment variables provide
+                    the ability to run-time switch between OpenSWR and llvmpipe software renderers.
+                </p>
 
-<strong>
-<p> For more detail, please see the <a href="talks/SC15DevConf-OpenSWR.pdf">"OpenSWR Overview"</a>
-presented at the Intel<sup>&reg;</sup> HPC Developers Conference at SC15.</p>
-</strong>
+                <strong>
+                    For more detail, please see the <a href="talks/SC15DevConf-OpenSWR.pdf">"OpenSWR Overview"</a>
+                    presented at the Intel<sup>&reg;</sup> HPC Developers Conference at SC15.
+                </strong>
 
-<hr>
-<p>
-<h5>
-How to build Mesa with OpenSWR:
-</h5>
-<br>
-Please follow instructions for <a href="build-linux.html">Linux</a> or <a href="build-windows.html">Windows</a>.
-</p>
+                <a name="build">
+                <h2>
+                    <a id="intro" class="anchor" href="#wintro" aria-hidden="true">
+                        <span class="octicon octicon-link"></span>
+                    </a>
+                    Building Mesa with OpenSWR
+                </h2>
+                </a>
 
-<hr>
+                <p>
+                    OpenSWR is built as a gallium driver within Mesa.
+                </p>
+                <p>
+                    Build instructions are available for building on <a href="build-linux.html">Linux</a> or
+                    <a href="build-windows.html">Windows</a>.
+                </p>
 
-<h3><a id="news" class="anchor" href="#news" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-    Updates
-</h3>
+                <h2><a id="news" class="anchor" href="#news" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+                    Updates
+                </h2>
 
-<dl>
-  <dt>March 27, 2018</dt>
-  <dd>
-  <p><a href="http://mesa3d.org/">Mesa 18.0.0</a> has been released with support for SKX and KNL architectures in OpenSWR.
-  </dd>
+                <dl>
+                    <dt>March 27, 2018</dt>
+                    <dd>
+                        <a href="http://mesa3d.org/">Mesa 18.0.0</a> has been released with support for SKX and KNL
+                        architectures in OpenSWR.
+                    </dd>
 
-  <dt>January 30, 2017</dt>
-  <dd>
-    <p>Added Windows build instructions, and moved instructions for both Linux and Windows to their own page.</p>
-  </dd>
+                    <dt>January 30, 2017</dt>
+                    <dd>
+                        Added Windows build instructions, and moved instructions for both Linux and Windows to their own
+                        page.
+                    </dd>
 
-  <dt>July 8, 2016</dt>
-  <dd>
-    <p><a href="http://mesa3d.org/">Mesa 12.0</a> has been released and contains OpenSWR as an optional driver.  Development work on OpenSWR is now done on the mesa git master repository.</p>
-  </dd>
+                    <dt>July 8, 2016</dt>
+                    <dd>
+                        <a href="http://mesa3d.org/">Mesa 12.0</a> has been released and contains OpenSWR as an optional
+                        driver.  Development work on OpenSWR is now done on the mesa git master repository.
+                    </dd>
 
-<dt>Oct 19, 2015</dt>
-<dd>
-<p>Our initial public version of our Mesa+SWR integration work is now available from <a href="https://github.com/OpenSWR/openswr-mesa">https://github.com/OpenSWR/openswr-mesa</a>.</p>
-</dd>
+                    <dt>Oct 19, 2015</dt>
+                    <dd>
+                        Our initial public version of our Mesa+SWR integration work is now available from <a
+                        href="https://github.com/OpenSWR/openswr-mesa">https://github.com/OpenSWR/openswr-mesa</a>.
+                    </dd>
 
-<dt>Aug 9, 2015</dt>
-<dd>
-<p> Since the release of early alpha, we have been busy integrating our OpenSWR
-core into the Mesa project.  This enables us to take advantage of a very
-mature, very feature complete driver stack that would have been very difficult
-to develop on our own.</p>
-<p> The result is that OpenSWR now has far greater functionality than the OpenGL
-1.4 features available in the first alpha release.</p>
-</dd>
+                    <dt>Aug 9, 2015</dt>
+                    <dd>
+                        <p>
+                            Since the release of early alpha, we have been busy integrating our OpenSWR core into the
+                            Mesa project.  This enables us to take advantage of a very mature, very feature complete
+                            driver stack that would have been very difficult to develop on our own.
+                        </p>
+                        <p>
+                            The result is that OpenSWR now has far greater functionality than the OpenGL 1.4 features
+                            available in the first alpha release.
+                        </p>
+                    </dd>
 
-<dt>Dec 12, 2014</dt>
-<dd>
-<p>ALPHA release.  This version is the first to be released to the public.  Please bear
-with us if there are build or functionality issues.  The major
-applications used for testing were ParaView and VisIt - if you are
-trying another program you may encounter missing features.</p>
+                    <dt>Dec 12, 2014</dt>
+                    <dd>
+                        <p>
+                            ALPHA release.  This version is the first to be released to the public.  Please bear with us
+                            if there are build or functionality issues.  The major applications used for testing were
+                            ParaView and VisIt - if you are trying another program you may encounter missing features.
+                        </p>
+                        <p>
+                            This version is coming out as we are working on some major cleanups to the code.  In order
+                            to keep our commitment to release this to the community and to provide a well-tested
+                            version, we are releasing the code that was used for the SC14 demonstrations.  The next
+                            major release will contain the cleanups.
+                        </p>
+                        <p>
+                            The source code can be downloaded here:
+                            <ul>
+                                <li><a href="https://github.com/OpenSWR/openswr/archive/v0.1.tar.gz">v0.1.tar.gz</a>
+                                <li><a href="https://github.com/OpenSWR/openswr/archive/v0.1.tar.gz">v0.1.zip</a>
+                            </ul>
+                        </p>
+                    </dd>
 
-<p>This version is coming out as we are working on some major cleanups to
-the code.  In order to keep our commitment to release this to the
-community and to provide a well-tested version, we are releasing the
-code that was used for the SC14 demonstrations.  The next major
-release will contain the cleanups.</p>
+                    <dt>Dec 8, 2014</dt>
+                    <dd>
+                        The slides for our OpenSWR-related talks at SC14 are now available:
+                        <ul>
+                            <li>
+                                <a href="talks/SC14DevConf-SWR.pdf">"Software Rasterizer (SWR)"</a> (presented at the
+                                Intel HPC Developers Conference at SC14)
+                            </li>
+                            <li>
+                                <a href="http://www.ospray.org/download/talks/UltraVis14-HiFiVis-compressed.pdf">
+                                    "High-Fidelity Visualization"</a> (presented at UltraVis 2014)
+                            </li>
+                        </ul>
+                    </dd>
 
-<p>The source code can be downloaded from here:
-<ul>
-<li><a href="https://github.com/OpenSWR/openswr/archive/v0.1.tar.gz">v0.1.tar.gz</a>
-<li><a href="https://github.com/OpenSWR/openswr/archive/v0.1.tar.gz">v0.1.zip</a>
-</ul>
-</p>
-</dd>
+                    <dt>Nov 13, 2014</dt>
+                    <dd>
+                        There is an upcoming talk on OpenSWR at Supercomputing 2014:
+                        <ul>
+                            <li>At the "Visualization" track of the <a href="http://ihpcc2014.com/dw-visual.html">
+                                    Intel<sup>&reg;</sup> HPC Developer Conference (Nov 16, 2014)</a></li>
+                        </ul>
+                        We will be posting the slides of this talk as soon as the event is over.
+                    </dd>
+                </dl>
 
-<dt>Dec 8, 2014</dt>
-<dd>
-The slides for our OpenSWR-related talks at SC14 are now available:
-<ul>
-<li>
-<a href="talks/SC14DevConf-SWR.pdf">"Software Rasterizer (SWR)"</a> (presented at the Intel HPC Developers Conference at SC14)
-</li>
-<li>
-<a href="http://www.ospray.org/download/talks/UltraVis14-HiFiVis-compressed.pdf">"High-Fidelity Visualization"</a> (presented at UltraVis 2014)
-</li>
-</ul>
-</dd>
+                <!-- FOOTER  -->
+                <div id="footer_wrap" class="outer">
+                    <footer class="inner">
+                        <p class="copyright">OpenSWR maintained by <a href="https://github.com/OpenSWR">OpenSWR</a>
+                        <br>For information about compiler optimizations, see our <a href="https://software.intel.com/en-us/articles/optimization-notice#opt-en">Optimization Notice</a>.
+                        <br>&copy;2009-2018 Intel Corporation
+                        <br><a href="https://www.intel.com/privacy">Privacy</a></p>
+                    </footer>
+                </div>
 
-<dt>Nov 13, 2014</dt>
-<dd>
 
-There is an upcoming talk on OpenSWR at Supercomputing 2014:
-<ul>
-	<li>At the "Visualization" track of the <a href="http://ihpcc2014.com/dw-visual.html">Intel<sup>&reg;</sup> HPC Developer Conference (Nov 16, 2014)</a></li>
-</ul>
-We will be posting the slides of this talk as soon as the event is over.
-</dd>
-</dl>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">OpenSWR maintained by <a href="https://github.com/OpenSWR">OpenSWR</a>
-		<br>For information about compiler optimizations, see our <a href="https://software.intel.com/en-us/articles/optimization-notice#opt-en">Optimization Notice</a>.
-		<br>&copy;2009-2018 Intel Corporation
-		<br><a href="https://www.intel.com/privacy">Privacy</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
+    </body>
 </html>

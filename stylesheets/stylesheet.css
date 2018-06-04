@@ -169,8 +169,8 @@ p img {
 
 pre, code {
   width: 100%;
-  color: #222;
-  background-color: #fff;
+  color: #444;
+  background-color: #f8f8f8;
 
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
   font-size: 14px;
@@ -218,6 +218,52 @@ ul {
 ol {
   list-style: decimal inside;
   padding-left: 20px;
+}
+
+ol.toc {
+    counter-reset: item;
+    margin: 0;
+    padding: 0;
+}
+ol.toc > li.toc {
+    display: table;
+    counter-increment: item;
+    margin-bottom: 0.3em;
+}
+ol.toc > li.toc:before {
+    content: counters(item, ".") ". ";
+    display: table-cell;
+    padding-right: 0.6em;
+}
+li.toc ol.toc > li.toc {
+    margin: 0;
+}
+li.toc ol.toc > li.toc:before {
+    content: counters(item, ".") " ";
+}
+
+ul.navbar {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+li.navbar {
+    float: left;
+}
+li.navbar a {
+    display: block;
+    color: #ddd;
+    text-align: center;
+    text-decoration: none;
+    padding: 1em 1em;
+}
+li.navbar a:hover {
+    color: #fff;
+}
+li.navbar.active a {
+    color: #007edf;
 }
 
 dl dt {
