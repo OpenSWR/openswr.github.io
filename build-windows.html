@@ -19,8 +19,12 @@
             <header class="inner">
                 <a id="mesa_banner" href="https://cgit.freedesktop.org/mesa/mesa/tree/src/gallium/drivers/swr">View source in Mesa</a>
 
-                <h1 id="project_title">OpenSWR</h1>
-                <h2 id="project_tagline">A High Performance, Highly Scalable Software Rasterizer for OpenGL</h2>
+                <a href="index.html">
+                    <h1 id="project_title">OpenSWR</h1>
+                </a>
+                <a href="index.html">
+                    <h2 id="project_tagline">A High Performance, Highly Scalable Software Rasterizer for OpenGL</h2>
+                </a>
 
                 <section id="contact">
                     For more information please <a href="mailto:openswr@googlegroups.com">send us an email</a>.
@@ -96,13 +100,13 @@
                 </p>
 
                 <pre>
-cmake -DCMAKE_GENERATOR_PLATFORM=x64 `
-      -DLLVM_TARGETS_TO_BUILD=X86 `
-      -DLLVM_ENABLE_RTTI=1 `
-      -DLLVM_USE_CRT_DEBUG=MTd `
-      -DLLVM_USE_CRT_RELEASE=MT `
-      -DLLVM_ENABLE_TERMINFO=OFF `
-      -DCMAKE_INSTALL_PREFIX=C:\LLVM\install `
+cmake -D CMAKE_GENERATOR_PLATFORM=x64 `
+      -D LLVM_TARGETS_TO_BUILD=X86 `
+      -D LLVM_ENABLE_RTTI=1 `
+      -D LLVM_USE_CRT_DEBUG=MTd `
+      -D LLVM_USE_CRT_RELEASE=MT `
+      -D LLVM_ENABLE_TERMINFO=OFF `
+      -D CMAKE_INSTALL_PREFIX=C:\LLVM\install `
       C:\LLVM\src
                 </pre>
 
@@ -124,13 +128,13 @@ cmake -DCMAKE_GENERATOR_PLATFORM=x64 `
 
                 <pre>
 cd C:\LLVM\build-release
-cmake -DCMAKE_GENERATOR_PLATFORM=x64 `
-      -DLLVM_TARGETS_TO_BUILD=X86 `
-      -DLLVM_ENABLE_RTTI=1 `
-      -DLLVM_USE_CRT_DEBUG=MTd `
-      -DLLVM_USE_CRT_RELEASE=MT `
-      -DLLVM_ENABLE_TERMINFO=OFF `
-      -DCMAKE_INSTALL_PREFIX=C:\LLVM\install-release `
+cmake -D CMAKE_GENERATOR_PLATFORM=x64 `
+      -D LLVM_TARGETS_TO_BUILD=X86 `
+      -D LLVM_ENABLE_RTTI=1 `
+      -D LLVM_USE_CRT_DEBUG=MTd `
+      -D LLVM_USE_CRT_RELEASE=MT `
+      -D LLVM_ENABLE_TERMINFO=OFF `
+      -D CMAKE_INSTALL_PREFIX=C:\LLVM\install-release `
       C:\LLVM\src
 cmake --build . --config Release
 cmake --build . --config Release --target install
@@ -142,13 +146,13 @@ cmake --build . --config Release --target install
 
                 <pre>
 cd C:\LLVM\build-debug
-cmake -DCMAKE_GENERATOR_PLATFORM=x64 `
-      -DLLVM_TARGETS_TO_BUILD=X86 `
-      -DLLVM_ENABLE_RTTI=1 `
-      -DLLVM_USE_CRT_DEBUG=MTd `
-      -DLLVM_USE_CRT_RELEASE=MT `
-      -DLLVM_ENABLE_TERMINFO=OFF `
-      -DCMAKE_INSTALL_PREFIX=C:\LLVM\install-debug `
+cmake -D CMAKE_GENERATOR_PLATFORM=x64 `
+      -D LLVM_TARGETS_TO_BUILD=X86 `
+      -D LLVM_ENABLE_RTTI=1 `
+      -D LLVM_USE_CRT_DEBUG=MTd `
+      -D LLVM_USE_CRT_RELEASE=MT `
+      -D LLVM_ENABLE_TERMINFO=OFF `
+      -D CMAKE_INSTALL_PREFIX=C:\LLVM\install-debug `
       C:\LLVM\src
 cmake --build . --config Debug
 cmake --build . --config Debug --target install
