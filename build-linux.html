@@ -114,7 +114,7 @@ llvm-x.y.z.src.tar.xz
 $ tar xJf llvm-x.y.z.src.tar.xz
 $ mkdir build
 $ cd build
-$ cmake -G "Unix Makefiles"
+$ cmake -G "Unix Makefiles" \
         -D CMAKE_BUILD_TYPE=Release \
         -D LLVM_TARGETS_TO_BUILD=X86 \
         -D BUILD_SHARED_LIBS=1 \
@@ -166,7 +166,7 @@ $ ../configure --disable-dri \
                 </p>
 
                 <pre>
---disable-xvmc --disable-vdpau --disable-omx --disable-va
+--disable-xvmc --disable-vdpau --disable-va
                 </pre>
 
                 <p>
