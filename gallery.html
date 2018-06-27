@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="OpenSWR : A High Performance, Highly Scalable software OpenGL implementation">
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <meta name="description" content="OpenSWR : A High Performance, Highly Scalable software OpenGL implementation">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>OpenSWR</title>
-  </head>
+        <title>OpenSWR</title>
+    </head>
 
-  <body>
+    <body>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="mesa_banner" href="https://cgit.freedesktop.org/mesa/mesa/tree/src/gallium/drivers/swr">View source in Mesa</a>
+        <!-- HEADER -->
+        <div id="header_wrap" class="outer">
+            <header class="inner">
+                <a id="mesa_banner" href="https://cgit.freedesktop.org/mesa/mesa/tree/src/gallium/drivers/swr">View source in Mesa</a>
 
                 <a href="index.html">
                     <h1 id="project_title">OpenSWR</h1>
@@ -34,65 +34,65 @@
                         <li class="navbar" style="float:right"><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
-        </header>
-    </div>
+            </header>
+        </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a id="intro" class="anchor" href="#wintro" aria-hidden="true"><span class="octicon octicon-link"></span></a>Paraview and OpenSWR</h3>
+        <!-- MAIN CONTENT -->
+        <div id="main_content_wrap" class="outer">
+            <section id="main_content" class="inner">
+                <h3>
+                    <a id="intro" class="anchor" href="#wintro" aria-hidden="true"><span class="octicon octicon-link"></span></a>Paraview and OpenSWR</h3>
 
-<p>Here are a couple of examples using OpenSWR as the backend renderer for Paraview.
-<br>These visualizations were achieved using unmodified Paraview 4.1 on a Core&trade; i7-4790 workstation with 32GB of memory.</p>
+                <p>Here are a couple of examples using OpenSWR as the backend renderer for Paraview.
+                <br>These visualizations were achieved using unmodified Paraview 4.1 on a Core&trade; i7-4790 workstation with 32GB of memory.</p>
 
-<table rules="rows">
-<!-- ======================================================= -->
-	<tr>
-		<td style="vertical-align:center" width=235>
-      <a href="jpg/SpaceWeather_SWR.png"><img src="jpg/SpaceWeather_SWR.png" width="95%"></a>
-			<p style="text-align:center"><a style="text-align:center" href="http://youtu.be/c_td8epBihg">Magnetic Reconnection time series animation can be found here</a>.<p>
-    </td>
-    <td style="vertical-align:top">
-      <h4 style="text-align:center">"Daughton Magnetic Reconnection" IsoSurface</h4>
-			<ul id="demo-bullets">
-				<li>Iso-surface of the 1024<sup>3</sup> Daughton Magnetic Reconnection volume data set, generated with ParaView, and rendered using OpenSWR.</li>
-				<li>Generated iso-surface contains 20M and 85M triangles (depending on time slice).</li>
-				<br>
-			</ul>
-			<cite>Model used with permission from Bill Daughton (LANL) and Berk Geveci (KitWare). For more information on this simulation, please read <a href="http://arxiv.org/abs/1405.4040">this paper.</a></cite>
-    </td>
-	</tr>
-<!-- ======================================================= -->
-  <tr>
-    <td style="vertical-align:center" width=235>
-      <a href="jpg/Wendell_SWR.png"><img src="jpg/Wendell_SWR.png" width="95%"></a></p>
-			<p style="text-align:center"><a style="text-align:center" href="http://youtu.be/YM-zm9k7vtc">Plasma Cyclone time series animation can be found here</a>.<p>
-    </td>
-    <td style="vertical-align:top">
-      <h4 style="text-align:center">"Wendell Plasma Cyclone" IsoSurface</h4>
-			<ul id="demo-bullets">
-				<li>Iso-surfaces of the 257<sup>3</sup> Wendell Horton rF13 Plasma Vortex volume data set, generated with ParaView, and rendered using OpenSWR.</li>
-				<br>
-				<br>
-			</ul>
-			<cite>Model used with permission from Wendell Horton, Anne Bowen, and Greg Foss at Texas Advanced Computing Center.  For more information about Dr. Horton's fascinating plasma studies, please visit:  <a href="http://www.tacc.utexas.edu/-/a-deep-dive-into-plasma">A Deep Dive Into Plasma</a></cite>
-		</td>
-  </tr>
-    
-  <!-- ======================================================= -->
-</table>
+                <table rules="rows">
+                    <!-- ======================================================= -->
+                    <tr>
+                        <td style="vertical-align:center" width=235>
+                            <a href="jpg/SpaceWeather_SWR.png"><img src="jpg/SpaceWeather_SWR.png" width="95%"></a>
+                            <p style="text-align:center"><a style="text-align:center" href="http://youtu.be/c_td8epBihg">Magnetic Reconnection time series animation can be found here</a>.<p>
+                        </td>
+                        <td style="vertical-align:top">
+                            <h4 style="text-align:center">"Daughton Magnetic Reconnection" IsoSurface</h4>
+                            <ul id="demo-bullets">
+                                <li>Iso-surface of the 1024<sup>3</sup> Daughton Magnetic Reconnection volume data set, generated with ParaView, and rendered using OpenSWR.</li>
+                                <li>Generated iso-surface contains 20M and 85M triangles (depending on time slice).</li>
+                                <br>
+                            </ul>
+                            <cite>Model used with permission from Bill Daughton (LANL) and Berk Geveci (KitWare). For more information on this simulation, please read <a href="http://arxiv.org/abs/1405.4040">this paper.</a></cite>
+                        </td>
+                    </tr>
+                    <!-- ======================================================= -->
+                    <tr>
+                        <td style="vertical-align:center" width=235>
+                            <a href="jpg/Wendell_SWR.png"><img src="jpg/Wendell_SWR.png" width="95%"></a></p>
+                            <p style="text-align:center"><a style="text-align:center" href="http://youtu.be/YM-zm9k7vtc">Plasma Cyclone time series animation can be found here</a>.<p>
+                        </td>
+                        <td style="vertical-align:top">
+                            <h4 style="text-align:center">"Wendell Plasma Cyclone" IsoSurface</h4>
+                            <ul id="demo-bullets">
+                                <li>Iso-surfaces of the 257<sup>3</sup> Wendell Horton rF13 Plasma Vortex volume data set, generated with ParaView, and rendered using OpenSWR.</li>
+                                <br>
+                                <br>
+                            </ul>
+                            <cite>Model used with permission from Wendell Horton, Anne Bowen, and Greg Foss at Texas Advanced Computing Center.  For more information about Dr. Horton's fascinating plasma studies, please visit:  <a href="http://www.tacc.utexas.edu/-/a-deep-dive-into-plasma">A Deep Dive Into Plasma</a></cite>
+                        </td>
+                    </tr>
 
-	<!-- FOOTER  -->
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">OpenSWR maintained by <a href="https://github.com/OpenSWR">OpenSWR</a>
-		<br>For information about compiler optimizations, see our <a href="https://software.intel.com/en-us/articles/optimization-notice#opt-en">Optimization Notice</a>.
-		<br>&copy;2009-2018 Intel Corporation
-		<br><a href="https://www.intel.com/privacy">Privacy</a></p>
-      </footer>
-    </div>
+                    <!-- ======================================================= -->
+                </table>
 
-  </body>
+                <!-- FOOTER  -->
+                <!-- FOOTER  -->
+                <div id="footer_wrap" class="outer">
+                    <footer class="inner">
+                        <p class="copyright">OpenSWR maintained by <a href="https://github.com/OpenSWR">OpenSWR</a>
+                        <br>For information about compiler optimizations, see our <a href="https://software.intel.com/en-us/articles/optimization-notice#opt-en">Optimization Notice</a>.
+                        <br>&copy;2009-2018 Intel Corporation
+                        <br><a href="https://www.intel.com/privacy">Privacy</a></p>
+                    </footer>
+                </div>
+
+    </body>
 </html>
