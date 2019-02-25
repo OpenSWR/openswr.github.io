@@ -47,10 +47,14 @@
                 <div class="note">
                     <h6>NOTE</h6>
                     <p>
-                        These instructions are for Mesa 19.0.0 and newer, which has migrated to using Meson+Ninja for
-                        configuring and building. Previous versions&mdash;18.3.4 and older&mdash;used GNU Autotools. If
-                        you are using a previous version, or would still like to use Autotools before it is removed,
-                        please click <a href="build-linux-autotools.html">here</a>.
+                        These instructions are for Mesa 18.3.4 and earlier, and uses GNU Autotools for configuring the
+                        build. As of Mesa 19.0.0, the use of Autotools is deprecated, and is slated to be removed in the
+                        future. Mesa now uses the Meson build system with Ninja. For instructions on building Mesa with
+                        OpenSWR using Meson+Ninja, please click <a href="build-linux.html">here</a>.
+                    </p>
+                    <p>
+                        If you still want to use Autotools before it is completely removed, you can use the
+                        <code>--enable-autotools</code> flag during the configure step.
                     </p>
                 </div>
 

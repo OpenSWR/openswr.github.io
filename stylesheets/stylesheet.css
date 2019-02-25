@@ -434,6 +434,12 @@ Full-Width Styles
   background: #212121;
 }
 
+.note {
+    background: #f8f8f8;
+    border: 1px solid #888;
+    border-radius: 5px;
+    padding: 5px;
+}
 
 
 /*******************************************************************************
