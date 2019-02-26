@@ -55,8 +55,8 @@
                 </div>
 
                 <p>
-                    On Linux, OpenSWR is built within Mesa using the standard autoconf package as described in Mesa's
-                    <a href="http://www.mesa3d.org/install.html">installation page</a>, with the addition of
+                    On Linux, OpenSWR is built within Mesa using the Meson build system with Ninja, as described in Mesa's
+                    <a href="http://www.mesa3d.org/meson.html">Meson installation page</a>, with the addition of
                     <code>swr</code> to the list of gallium drivers.
                 </p>
                 <p>
@@ -83,7 +83,8 @@
 
                 <ul>
                     <li><code>libtool-bin</code></li>
-                    <li><code>autoconf</code></li>
+                    <li><code>meson</code></li>
+                    <li><code>ninja</code></li>
                     <li><code>python-pip</code></li>
                     <li><code>libx11-dev</code></li>
                     <li><code>libxext-dev</code></li>
@@ -114,6 +115,7 @@
                 One of the major Mesa requirements is LLVM, but with some additional
                 flags required at compile time. If you do not already have LLVM, you will need to install it first.
                 LLVM source is available as tarball on their <a href="http://releases.llvm.org/">release download page</a>.
+                Currently, LLVM versions 6.x through 7.0.0 are supported.
                 Once downloaded, use the following steps to build and install LLVM. In this example we are installing them locally.
                 </p>
                 <pre>
@@ -135,6 +137,8 @@ $ make -j `nproc`
 $ make install
                 </pre>
 
+                If you do not install LLVM locally, make sure you set your <code>LD_LIBRARY_PATH</code> and <code>PATH</code>
+                environment variables to the LLVM <code>lib</code> and <code>bin</code> directories, respectively.
 
                 <a name="building-openswr"><h3>Building Mesa with OpenSWR</h3></a>
 
@@ -154,29 +158,23 @@ mesa-x.y.z.tar.gz
 $ tar xf mesa-x.y.z.tar.gz
 $ cd mesa-x.y.z
 $ mkdir build
-$ cd build
                 </pre>
 
                 <p>
-                Now we can configure Mesa with OpenSWR - note the addition of <code>swr</code> as a gallium driver.
+                Now we can configure Mesa with OpenSWR.
                 In this example, we are installing Mesa locally.
                 </p>
 
                 <pre>
-$ ../configure --disable-dri \
-               --disable-egl \
-               --disable-gbm \
-               --with-gallium-drivers=swrast,swr \
-               --with-platforms=x11 \
-               --prefix=/home/openswr/.local
-                </pre>
-
-                <p>
-                If you run into problems due to VL on your system, add the following flags to the above <code>configure</code> call:
-                </p>
-
-                <pre>
---disable-xvmc --disable-vdpau --disable-va
+$ meson --buildtype=release \
+        -Dglx=gallium-xlib \
+        -Dvulkan-drivers= \
+        -Ddri-drivers= \
+        -Dgallium-drivers=swrast,swr \
+        -Dplatforms=x11 \
+        -Dgallium-omx=disabled \
+        -Dprefix=/home/openswr/.local \
+        build
                 </pre>
 
                 <p>
@@ -184,7 +182,7 @@ $ ../configure --disable-dri \
                 </p>
 
                 <pre>
---enable-gallium-osmesa
+-Dosmesa=gallium
                 </pre>
 
                 <p>
@@ -195,23 +193,28 @@ $ ../configure --disable-dri \
                 </p>
 
                 <pre>
---with-swr-archs=avx,avx2,skx,knl
+-Dswr-archs=avx,avx2,skx,knl
                 </pre>
 
                 <p>
-                After you have the appropriate <code>configure</code> command for your system, you can build and install with
-                <code>make</code>
+                Once configured, you can use <code>ninja</code> to build Mesa.
                 </p>
 
                 <pre>
-$ make -j `nproc`
-$ make install
+$ ninja -C build
                 </pre>
 
                 <p>
-                Once installed, you will see <code>libGL.so</code>, <code>libOSMesa.so</code>, and <code>libSWR&lt;arch&gt;.so</code>
-                (for each architecture selected) in <code>lib/gallium/</code> in your build directory as well as in <code>lib/</code> in
-                your installation directory.
+                And you can use <code>meson</code> to install.
+                </p>
+
+                <pre>
+$ meson install -C build
+                </pre>
+
+                <p>
+                Once installed, you will see <code>libGL.so</code>, <code>libOSMesa.so</code> (if it was enabled), and
+                <code>libSWR&lt;arch&gt;.so</code> for each architecture selected.
                 </p>
 
                 <a name="using-openswr"><h3>Using Mesa with OpenSWR</h3></a>
@@ -224,7 +227,7 @@ $ make install
                 </p>
 
                 <pre>
-$ export LD_LIBRARY_PATH=/some/path/to/mesa/lib:$LD_LIBRARY_PATH
+$ export LD_LIBRARY_PATH=/your/path/to/mesa/lib:$LD_LIBRARY_PATH
                 </pre>
 
                 <p>
