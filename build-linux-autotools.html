@@ -59,9 +59,9 @@
                 </div>
 
                 <p>
-                    On Linux, OpenSWR is built within Mesa using the standard autoconf package as described in Mesa's
+                    On Linux, OpenSWR can be built within Mesa using GNU autotools as described in Mesa's
                     <a href="http://www.mesa3d.org/install.html">installation page</a>, with the addition of
-                    <code>swr</code> to the list of gallium drivers.
+                    <code>swr</code> to the list of gallium drivers. Note that the use of autotools is deprecated as of Mesa 19.0.0.
                 </p>
                 <p>
                     The instructions below describe how to compile Mesa using the Mesa released tarballs.  Compiling
@@ -118,6 +118,7 @@
                 One of the major Mesa requirements is LLVM, but with some additional
                 flags required at compile time. If you do not already have LLVM, you will need to install it first.
                 LLVM source is available as tarball on their <a href="http://releases.llvm.org/">release download page</a>.
+                Currently, LLVM versions 6.x through 7.0.1 are supported.
                 Once downloaded, use the following steps to build and install LLVM. In this example we are installing them locally.
                 </p>
                 <pre>
@@ -139,6 +140,8 @@ $ make -j `nproc`
 $ make install
                 </pre>
 
+                If you do not install LLVM locally, make sure you set your <code>LD_LIBRARY_PATH</code> and <code>PATH</code>
+                environment variables to the LLVM <code>lib</code> and <code>bin</code> directories, respectively.
 
                 <a name="building-openswr"><h3>Building Mesa with OpenSWR</h3></a>
 
@@ -162,7 +165,7 @@ $ cd build
                 </pre>
 
                 <p>
-                Now we can configure Mesa with OpenSWR - note the addition of <code>swr</code> as a gallium driver.
+                Now we can configure Mesa with OpenSWR.
                 In this example, we are installing Mesa locally.
                 </p>
 
@@ -228,7 +231,7 @@ $ make install
                 </p>
 
                 <pre>
-$ export LD_LIBRARY_PATH=/some/path/to/mesa/lib:$LD_LIBRARY_PATH
+$ export LD_LIBRARY_PATH=/your/path/to/mesa/lib:$LD_LIBRARY_PATH
                 </pre>
 
                 <p>
