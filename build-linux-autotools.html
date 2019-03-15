@@ -47,17 +47,21 @@
                 <div class="note">
                     <h6>NOTE</h6>
                     <p>
-                        These instructions are for Mesa 19.0.0 and newer, which has migrated to using Meson+Ninja for
-                        configuring and building. Previous versions&mdash;18.3.4 and older&mdash;used GNU Autotools. If
-                        you are using a previous version, or would still like to use Autotools before it is removed,
-                        please click <a href="build-linux-autotools.html">here</a>.
+                        These instructions are for Mesa 18.3.4 and earlier, and uses GNU Autotools for configuring the
+                        build. As of Mesa 19.0.0, the use of Autotools is deprecated, and is slated to be removed in the
+                        future. Mesa now uses the Meson build system with Ninja. For instructions on building Mesa with
+                        OpenSWR using Meson+Ninja, please click <a href="build-linux.html">here</a>.
+                    </p>
+                    <p>
+                        If you still want to use Autotools before it is completely removed, you must use the
+                        <code>--enable-autotools</code> flag during the configure step.
                     </p>
                 </div>
 
                 <p>
-                    On Linux, OpenSWR is built within Mesa using the Meson build system with Ninja, as described in Mesa's
-                    <a href="http://www.mesa3d.org/meson.html">Meson installation page</a>, with the addition of
-                    <code>swr</code> to the list of gallium drivers.
+                    On Linux, OpenSWR can be built within Mesa using GNU autotools as described in Mesa's
+                    <a href="http://www.mesa3d.org/install.html">installation page</a>, with the addition of
+                    <code>swr</code> to the list of gallium drivers. Note that the use of autotools is deprecated as of Mesa 19.0.0.
                 </p>
                 <p>
                     The instructions below describe how to compile Mesa using the Mesa released tarballs.  Compiling
@@ -83,8 +87,7 @@
 
                 <ul>
                     <li><code>libtool-bin</code></li>
-                    <li><code>meson</code></li>
-                    <li><code>ninja</code></li>
+                    <li><code>autoconf</code></li>
                     <li><code>python-pip</code></li>
                     <li><code>libx11-dev</code></li>
                     <li><code>libxext-dev</code></li>
@@ -158,6 +161,7 @@ mesa-x.y.z.tar.gz
 $ tar xf mesa-x.y.z.tar.gz
 $ cd mesa-x.y.z
 $ mkdir build
+$ cd build
                 </pre>
 
                 <p>
@@ -166,15 +170,20 @@ $ mkdir build
                 </p>
 
                 <pre>
-$ meson --buildtype=release \
-        -Dglx=gallium-xlib \
-        -Dvulkan-drivers= \
-        -Ddri-drivers= \
-        -Dgallium-drivers=swrast,swr \
-        -Dplatforms=x11 \
-        -Dgallium-omx=disabled \
-        -Dprefix=/home/openswr/.local \
-        build
+$ ../configure --disable-dri \
+               --disable-egl \
+               --disable-gbm \
+               --with-gallium-drivers=swrast,swr \
+               --with-platforms=x11 \
+               --prefix=/home/openswr/.local
+                </pre>
+
+                <p>
+                If you run into problems due to VL on your system, add the following flags to the above <code>configure</code> call:
+                </p>
+
+                <pre>
+--disable-xvmc --disable-vdpau --disable-va
                 </pre>
 
                 <p>
@@ -182,7 +191,7 @@ $ meson --buildtype=release \
                 </p>
 
                 <pre>
--Dosmesa=gallium
+--enable-gallium-osmesa
                 </pre>
 
                 <p>
@@ -193,28 +202,23 @@ $ meson --buildtype=release \
                 </p>
 
                 <pre>
--Dswr-arches=avx,avx2,skx,knl
+--with-swr-archs=avx,avx2,skx,knl
                 </pre>
 
                 <p>
-                Once configured, you can use <code>ninja</code> to build Mesa.
+                After you have the appropriate <code>configure</code> command for your system, you can build and install with
+                <code>make</code>
                 </p>
 
                 <pre>
-$ ninja -C build
+$ make -j `nproc`
+$ make install
                 </pre>
 
                 <p>
-                And you can use <code>meson</code> to install.
-                </p>
-
-                <pre>
-$ meson install -C build
-                </pre>
-
-                <p>
-                Once installed, you will see <code>libGL.so</code>, <code>libOSMesa.so</code> (if it was enabled), and
-                <code>libSWR&lt;arch&gt;.so</code> for each architecture selected.
+                Once installed, you will see <code>libGL.so</code>, <code>libOSMesa.so</code>, and <code>libSWR&lt;arch&gt;.so</code>
+                (for each architecture selected) in <code>lib/gallium/</code> in your build directory as well as in <code>lib/</code> in
+                your installation directory.
                 </p>
 
                 <a name="using-openswr"><h3>Using Mesa with OpenSWR</h3></a>
