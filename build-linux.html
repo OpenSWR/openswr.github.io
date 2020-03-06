@@ -49,8 +49,7 @@
                     <p>
                         These instructions are for Mesa 19.0.0 and newer, which has migrated to using Meson+Ninja for
                         configuring and building. Previous versions&mdash;18.3.4 and older&mdash;used GNU Autotools. If
-                        you are using a previous version, or would still like to use Autotools before it is removed,
-                        please click <a href="build-linux-autotools.html">here</a>.
+                        you are using a previous version please click <a href="build-linux-autotools.html">here</a>.
                     </p>
                 </div>
 
@@ -240,13 +239,12 @@ $ export GALLIUM_DRIVER=swr
                 </pre>
 
                 <p>
-                You should see a message printed to the terminal when running a GL application when OpenSWR is set as the gallium
-                driver. For example:
+                You can verify that OpenSWR is used for rendering using the following command:
                 </p>
 
                 <pre>
-$ glxgears
-SWR detected AVX2 instruction support (using: libswrAVX2.so).
+$ glxinfo | grep "OpenGL\ renderer\ string"
+OpenGL renderer string: SWR (LLVM 8.0.0, 256 bits)
                 </pre>
                 <br>
 
@@ -255,7 +253,7 @@ SWR detected AVX2 instruction support (using: libswrAVX2.so).
                     <footer class="inner">
                         <p class="copyright">OpenSWR maintained by <a href="https://github.com/OpenSWR">OpenSWR</a>
                         <br>For information about compiler optimizations, see our <a href="https://software.intel.com/en-us/articles/optimization-notice#opt-en">Optimization Notice</a>.
-                        <br>&copy;2009-2018 Intel Corporation
+                        <br>&copy;2009-2020 Intel Corporation
                         <br><a href="https://www.intel.com/privacy">Privacy</a></p>
                     </footer>
                 </div>
