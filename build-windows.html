@@ -1,265 +1,479 @@
-
 <!DOCTYPE html>
 <html>
-
-    <head>
-        <meta charset='utf-8'>
-        <meta http-equiv="X-UA-Compatible" content="chrome=1">
-        <meta name="description" content="OpenSWR : A High Performance, Highly Scalable software OpenGL implementation">
-
-        <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-        <title>OpenSWR</title>
-    </head>
-
-    <body>
-
-        <!-- HEADER -->
-        <div id="header_wrap" class="outer">
-            <header class="inner">
-                <a id="mesa_banner" href="https://cgit.freedesktop.org/mesa/mesa/tree/src/gallium/drivers/swr">View source in Mesa</a>
-
-                <a href="index.html">
-                    <h1 id="project_title">OpenSWR</h1>
-                </a>
-                <a href="index.html">
-                    <h2 id="project_tagline">A High Performance, Highly Scalable Software Rasterizer for OpenGL</h2>
-                </a>
-
-                <nav>
-                    <ul class="navbar">
-                        <li class="navbar"><a href="index.html">Overview</a></li>
-                        <li class="navbar active"><a href="index.html#build">Build</a></li>
-                        <li class="navbar"><a href="gallery.html">Gallery</a></li>
-                        <li class="navbar"><a href="perf.html">Performance</a></li>
-                        <li class="navbar" style="float:right"><a href="contact.html">Contact</a></li>
-                    </ul>
-                </nav>
-            </header>
-        </div>
-
-        <!-- MAIN CONTENT -->
-        <div id="main_content_wrap" class="outer">
-            <section id="main_content" class="inner">
-
-                <h2>Windows Build Instructions</h2>
-
-                <p>
-                    On Windows, OpenSWR is built using the SCons package as described in Mesa's
-                    <a href="http://www.mesa3d.org/install.html">installation page</a>. OpenSWR also requires LLVM
-                    versions greater than 3.9.0 to build.
-                </p>
-
-                <p>
-                    The instructions below describe how to build Mesa with OpenSWR support for Windows.
-                </p>
-
-                <ol class="toc">
-                    <li class="toc"><a href="#setup">Setup</a>
-                        <ol class="toc">
-                            <li class="toc"><a href="#building-llvm">Building and Installing LLVM</a></li>
-                        </ol>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content=
+    "OpenSWR : A High Performance, Highly Scalable software OpenGL implementation">
+    <link rel="stylesheet" type="text/css" media="screen" href=
+    "stylesheets/stylesheet.css">
+    <title>OpenSWR</title>
+</head>
+<body>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+            <a id="mesa_banner" href=
+            "https://cgit.freedesktop.org/mesa/mesa/tree/src/gallium/drivers/swr">
+            View source in Mesa</a> <a href="index.html">
+            <h1 id="project_title">OpenSWR</h1></a> <a href=
+            "index.html">
+            <h2 id="project_tagline">A High Performance, Highly
+            Scalable Software Rasterizer for OpenGL</h2></a>
+            <nav>
+                <ul class="navbar">
+                    <li class="navbar">
+                        <a href="index.html">Overview</a>
                     </li>
-                    <li class="toc"><a href="#building-openswr">Building Mesa with OpenSWR</a></li>
-                    <li class="toc"><a href="#using-openswr">Using Mesa with OpenSWR</a></li>
-                </ol>
-
-                <a name="setup"><h3>Setup</h3></a>
-
-                <p>
-                    Mesa with OpenSWR requires the SCons package to build and install. SCons is available to download as
-                    an executable installer on SCons' <a href="https://scons.org/pages/download.html">download page</a>.
-                    The latest version should be fine.
-                </p>
-
-                <p>
-                    If you don't already have LLVM installed, you will need to install it first. LLVM requires CMake to
-                    build and install. CMake is available for Windows as an executable installer on CMake's
-                    <a href="https://cmake.org/download/">download page</a>. The latest version should be fine.
-                </p>
-
-                <p>
-                    You will need a utility that can open and decompress <code>tar.gz</code> and/or <code>tar.xz</code>
-                    files. An easy-to-use (and free) graphical option for Windows is 7-zip, available on 7-zip's
-                    <a href="https://www.7-zip.org/download.html">download page</a>.
-                </p>
-
-                <a name="building-llvm"><h4>Build and Install LLVM</h4></a>
-
-                <p>
-                    Mesa with OpenSWR relies on LLVM, so you will need to build and install it first if you do not
-                    already have it.  Please refer to the LLVM Windows build instructions with Visual Studio for a
-                    general overview, located <a href="http://llvm.org/docs/GettingStartedVS.html">here</a>.
-                </p>
-
-                <p>
-                    Once downloaded and decompressed, create a build directory to contain the built LLVM distribution.
-                    In this example, we build both the release and debug version of LLVM, though you can choose to only
-                    have one or the other.
-                </p>
-
-                <p>
-                    Suppose we have LLVM extracted to <code>C:\LLVM\src</code> with build directories
-                    <code>C:\LLVM\build-release</code> and <code>C:\LLVM\build-debug</code>. We will install to
-                    <code>C:\LLVM\install-release</code> and <code>C:\LLVM\install-debug</code>, respectively. Use
-                    <code>cmake</code> to generate MSVC <code>.sln</code> files, as follows:
-                </p>
-
-                <pre>
-cmake -D CMAKE_GENERATOR_PLATFORM=x64 `
-      -D LLVM_TARGETS_TO_BUILD=X86 `
-      -D LLVM_ENABLE_RTTI=1 `
-      -D LLVM_USE_CRT_DEBUG=MTd `
-      -D LLVM_USE_CRT_RELEASE=MT `
-      -D LLVM_ENABLE_TERMINFO=OFF `
-      -D CMAKE_INSTALL_PREFIX=C:\LLVM\install `
-      C:\LLVM\src
-                </pre>
-
-                <p>
-                    Note that, in theory, you only need to use one of <code>LLVM_USE_CRT_DEBUG</code> or
-                    <code>LLVM_USE_CRT_RELEASE</code>, depending on whether you are building Debug or Release, but it
-                    doesn't hurt to always include both in the cmake line.
-                </p>
-
-                <p>
-                    The Mesa Windows SCons build has the peculiarity that you cannot mix debug and release versions of
-                    libs (see link error LNK2038). If you are planning of building both version of Mesa, you should
-                    also build both versions of LLVM. Below, I am assuming that we are building both.
-                </p>
-
-                <p>
-                    Build both flavors of LLVM as shown below. The release version:
-                </p>
-
-                <pre>
-cd C:\LLVM\build-release
-cmake -D CMAKE_GENERATOR_PLATFORM=x64 `
-      -D LLVM_TARGETS_TO_BUILD=X86 `
-      -D LLVM_ENABLE_RTTI=1 `
-      -D LLVM_USE_CRT_DEBUG=MTd `
-      -D LLVM_USE_CRT_RELEASE=MT `
-      -D LLVM_ENABLE_TERMINFO=OFF `
-      -D CMAKE_INSTALL_PREFIX=C:\LLVM\install-release `
-      C:\LLVM\src
-cmake --build . --config Release
-cmake --build . --config Release --target install
-                </pre>
-
-                <p>
-                    and the debug version:
-                </p>
-
-                <pre>
-cd C:\LLVM\build-debug
-cmake -D CMAKE_GENERATOR_PLATFORM=x64 `
-      -D LLVM_TARGETS_TO_BUILD=X86 `
-      -D LLVM_ENABLE_RTTI=1 `
-      -D LLVM_USE_CRT_DEBUG=MTd `
-      -D LLVM_USE_CRT_RELEASE=MT `
-      -D LLVM_ENABLE_TERMINFO=OFF `
-      -D CMAKE_INSTALL_PREFIX=C:\LLVM\install-debug `
-      C:\LLVM\src
-cmake --build . --config Debug
-cmake --build . --config Debug --target install
-                </pre>
-
-                <a name="building-openswr"><h3>Build Mesa with OpenSWR</h3></a>
-
-                <p>
-                    First, clone the mesa repo. Full instructions are available on Mesa's
-                    <a href="https://www.mesa3d.org/repository.html">repository page</a>. In this case, you can simply
-                    clone the read-only repository.
-                </p>
-
-                <pre>
-git clone git://anongit.freedesktop.org/git/mesa/mesa
-                </pre>
-
-                <p>
-                    When building Mesa with OpenSWR, you must specify where LLVM is installed. In doing this, we can
-                    also specify which type of build we will do. For a debug Mesa build, link to the debug LLVM
-                    installation.  Similarly, use a release LLVM for building release Mesa. For release builds:
-                </p>
-
-                <pre>
-set LLVM=C:\LLVM\install-release
-scons swr=1 libgl-gdi build=release
-                </pre>
-
-                <p>
-                    and for debug builds:
-                </p>
-
-                <pre>
-set LLVM=C:\LLVM\install-debug
-scons swr=1 libgl-gdi
-                </pre>
-
-                <p>
-                    Note that you have to modify the LLVM environment variable between
-                    debug and release builds.
-                </p>
-
-                <p>
-                    If you want to compile OSMesa (for off-screen rendering support), simply add <code>osmesa</code> to
-                    SCons. For example:
-                </p>
-
-                <pre>
-set LLVM=C:\LLVM\install-release
-scons swr=1 libgl-gdi osmesa build=release
-                </pre>
-
-                <a name="using-openswr"><h3>Using Mesa with OpenSWR</h3></a>
-
-                <p>
-                    The build results in three DLL files:
+                    <li class="navbar active">
+                        <a href="index.html#build">Build</a>
+                    </li>
+                    <li class="navbar">
+                        <a href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="navbar">
+                        <a href="perf.html">Performance</a>
+                    </li>
+                    <li class="navbar" style="float:right">
+                        <a href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    </div><!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+        <section id="main_content" class="inner">
+            <h2>Windows Build Instructions</h2>
+            <p>The instructions below describe how to build Mesa
+            with OpenSWR for Windows.</p>
+            <p>On Windows, OpenSWR is built using the Meson package
+            as described in Mesa's <a href=
+            "http://www.mesa3d.org/install.html">installation
+            page</a>.</p>
+            <p>As of March 2022, OpenSWR has been moved to the
+            Amber branch of Mesa. This walkthrough uses the Amber
+            branch (21.3.x), as committed to Mesa 21.3.7. OpenSWR
+            has been removed from the primary Mesa branch. The Mesa
+            22.x branch and higher has OpenSWR removed. Review the
+            latest <a href=
+            "https://cgit.freedesktop.org/mesa/mesa/">Mesa
+            branches</a> for more information.</p>
+            <ol>
+                <li>
+                    <a href="#prerequisites">Prerequisites</a>
+                    <ol>
+                        <li>
+                            <a href=
+                            "#download-and-install">Download and
+                            Install Prerequisite Tools</a>
+                        </li>
+                        <li>
+                            <a href="#llvm">Download, Build, and
+                            Install LLVM</a>
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <a href="#building-openswr">Build Mesa with
+                    OpenSWR</a>
+                </li>
+                <li>
+                    <a href="#using-openswr">Using Mesa with
+                    OpenSWR</a>
+                </li>
+            </ol>
+            <p><a name="Prerequisites" id="Prerequisites"></a></p>
+            <h3 id="prerequisites">Prerequisites</h3>
+            <p>Building Mesa with OpenSWR requires:</p>
+            <ul>
+                <li>Microsoft Visual Studio 2019.
                     <ul>
-                        <li><code>opengl32.dll</code></li>
-                        <li><code>swrAVX.dll</code></li>
-                        <li><code>swrAVX2.dll</code></li>
+                        <li>Building Mesa with OpenSWR from the
+                        Microsoft Visual Studio 2022 build system
+                        is not recommended at time of
+                        publication</li>
                     </ul>
-                    <code>opengl32.dll</code> is located in <code>build\windows-x86_64\gallium\targets\libgl-gdi</code>,
-                    and the SWR libraries are located in <code>build\windows-x86_64\gallium\drivers\swr</code>. To make
-                    these libraries usable across the system, first make a backup of
-                    <code>C:\Windows\system32\opengl32.dll</code>, then place the above DLLs in
-                    <code>C:\Windows\system32</code>.  If you plan to just run simple command line tests, you can simply
-                    place them in your current directory.
-                </p>
-
-                <p>
-                    If you built with OSMesa, the libraries will be found under the
-                    <code>build\windows-x86_64\gallium\targets\osmesa</code> directory. These can also be copied to
-                    <code>C:\Windows\system32</code>.
-                </p>
-
-                <p>
-                    To use Mesa with OpenSWR, you will need to set OpenSWR as the gallium driver to use with the
-                    <code>GALLIUM_DRIVER</code> environment variable:
-                </p>
-
-                <pre>
-set GALLIUM_DRIVER=swr
-                </pre>
-
-                <p>
-                    Without this environmental variable set, the default Mesa <code>llvmpipe</code> driver will be used.
-                </p>
-
-                <br>
-
-                <!-- FOOTER  -->
-                <div id="footer_wrap" class="outer">
-                    <footer class="inner">
-                        <p class="copyright">OpenSWR maintained by <a href="https://github.com/OpenSWR">OpenSWR</a>
-                        <br>For information about compiler optimizations, see our <a href="https://software.intel.com/en-us/articles/optimization-notice#opt-en">Optimization Notice</a>.
-                        <br>&copy;2009-2020 Intel Corporation
-                        <br><a href="https://www.intel.com/privacy">Privacy</a></p>
-                    </footer>
-                </div>
-
-
-
-    </body>
+                </li>
+                <li>
+                    <a href="https://cmake.org">CMake</a>
+                </li>
+                <li>Decompression Utility such as 7-zip <em>or
+                Winzip</em></li>
+                <li>
+                    <a href="https://chocolatey.org">Chocolatey</a>
+                    and Chocolatey prerequisites for Mesa
+                </li>
+                <li>
+                    <a href="https://python.org">Python 3</a>
+                </li>
+                <li>Meson</li>
+                <li>
+                    <a href="https://gitforwindows.org">Git</a>
+                </li>
+                <li>
+                    <a href=
+                    "https://github.com/llvm/llvm-project">LLVM 12
+                    built from source</a>
+                    <ul>
+                        <li>Building Mesa with OpenSWR from LLVM 13
+                        or higher tools is not recommended at time
+                        of publication</li>
+                    </ul>
+                </li>
+                <li>Mesa Amber Branch source</li>
+                <li>Target systems with Advanced Vector Extensions
+                (AVX) or higher</li>
+            </ul>
+            <p>These instructions describe acquisition of all above
+            prerequisites except Microsoft Visual Studio.</p>
+            <p>Note: 32-bit builds of Mesa with OpenSWR are
+            possible but not described here. Use 32-bit targeting
+            from Microsoft Visual Studio and LLVM to build Mesa
+            with OpenSWR 32-bit.</p>
+            <p><a name="download-and-install" id=
+            "download-and-install"></a></p>
+            <h4 id="download-and-install-prerequisite-tools">
+            Download and Install Prerequisite Tools</h4>
+            <p><strong>CMake</strong></p>
+            <p>LLVM requires CMake to build and install. CMake is
+            available for Windows as an executable installer on
+            CMake's <a href="https://cmake.org/download/">download
+            page</a>. The latest version should be fine. CMake is
+            also distributed with Microsoft Visual Studio 2019.</p>
+            <p><strong>Archive Tool</strong></p>
+            <p>You will need a utility that can open and decompress
+            <code>tar.gz</code> and/or <code>tar.xz</code> files.
+            An easy-to-use (and free) graphical option for Windows
+            is 7-zip, available on 7-zip's <a href=
+            "https://www.7-zip.org/download.html">download
+            page</a>.</p>
+            <p><strong>Chocolatey</strong></p>
+            <p>Chocolatey is an easier way to get Mesa build time
+            dependencies deployed. Install <a href=
+            "https://chocolatey.org">Chocolatey</a>. Follow the
+            <a href="https://chocolatey.org/install">Installing
+            Chocolatey</a> instructions.</p>
+            <p>Install Mesa build requirements from Chocolatey from
+            a Command Prompt. You may wish to run this Command
+            Prompt with Administrator Privileges (Right
+            Click-&gt;Run As Administrator):</p>
+            <pre><code>choco.exe install python3 winflexbison pkgconfiglite
+</code></pre>
+            <p><strong>Python 3</strong></p>
+            <p>Install Python 3 via one of these options:</p>
+            <ul>
+                <li>As a <a href=
+                "https://python.org">standalone</a>
+                </li>
+                <li>Using the Microsoft Visual Studio distribution
+                <code>py.exe</code> utility</li>
+                <li>Using Chocolatey</li>
+            </ul>
+            <p>The walkthrough uses the Python 3.10 standalone.</p>
+            <p><strong>Meson</strong></p>
+            <p>Mesa with OpenSWR uses the Meson package to build
+            and install. Meson is available to download and install
+            via the Python 3 pip utility. The latest version should
+            be fine. Meson 0.61.2 is used in this walkthrough.</p>
+            <p>Install Meson from a Command Prompt. You may wish to
+            run this Command Prompt with Administrator Privileges
+            (Right Click-&gt;Run As Administrator). The Python 3
+            <code>pip.exe</code> utility is found in the Python 3
+            <code>Scripts</code> directory. Install Meson via
+            pip:</p>
+            <pre><code>pip.exe install meson mako
+</code></pre>
+            <p><strong>Git</strong></p>
+            <p><a href="https://gitforwindows.org">Install Git</a>
+            or look for it as distributed with Microsoft Visual
+            Studio.</p>
+            <p><a name="llvm" id="llvm"></a></p>
+            <h4 id="download-build-and-install-llvm">Download,
+            Build, and Install LLVM</h4>
+            <p>Mesa with OpenSWR relies on LLVM, so you will need
+            to build and install it first if you do not already
+            have it. The Mesa build relies the llvm-config.exe
+            utility. llvm-config.exe does <strong>not</strong> ship
+            with precompiled releases of LLVM at time of
+            publication. Build LLVM to generate all needed LLVM
+            tools to build Mesa. Please refer to the LLVM Windows
+            build instructions with Visual Studio for a general
+            overview, located <a href=
+            "http://llvm.org/docs/GettingStartedVS.html">here</a>.</p>
+            <p>This walkthrough uses <a href=
+            "https://github.com/llvm/llvm-project/releases">LLVM
+            12.0.1</a> (llvm-12.0.1.src.tar.xz). LLVM 13 was
+            observed to fail when building the Mesa Amber
+            branch.</p>
+            <p>Once LLVM source is downloaded and decompressed,
+            create a build directory to contain the built LLVM
+            distribution. In this example, we build both the
+            release and debug version of LLVM, though you can
+            choose to only have one or the other.</p>
+            <p>The Mesa Windows Meson build has the peculiarity
+            that you cannot mix debug and release versions of libs
+            (see link error LNK2038). If you are planning of
+            building both versions of Mesa, you should also build
+            both versions of LLVM. Below, it is assumed that we are
+            building both.</p>
+            <p>Suppose we have LLVM extracted to
+            <code>C:\LLVM\src</code> with build directories
+            <code>C:\LLVM\build-release</code> and
+            <code>C:\LLVM\build-debug</code>. We will install to
+            <code>C:\LLVM\install-release</code> and
+            <code>C:\LLVM\install-debug</code>, respectively.</p>
+            <p>Launch a fresh x64 Native Tools Command Prompt for
+            VS 2019. You may wish to run this Command Prompt with
+            Administrator Privileges (Right Click-&gt;Run As
+            Administrator). Use <code>cmake</code> to generate MSVC
+            <code>.sln</code> files, as follows: The release
+            version:</p>
+            <pre><code>cd C:\LLVM\build-release
+cmake -D CMAKE_GENERATOR_PLATFORM=x64 ^
+      -D LLVM_TARGETS_TO_BUILD=X86 ^
+      -D LLVM_ENABLE_RTTI=1 ^
+      -D LLVM_USE_CRT_DEBUG=MTd ^
+      -D LLVM_USE_CRT_RELEASE=MT ^
+      -D LLVM_ENABLE_TERMINFO=OFF ^
+      -D CMAKE_INSTALL_PREFIX=C:\LLVM\install-release ^
+      -Thost=x64 ^
+      C:\LLVM\src
+cmake --build . --config Release -Thost=x64
+cmake --build . --config Release --target install -Thost=x64
+</code></pre>
+            <p>and the debug version:</p>
+            <pre><code>cd C:\LLVM\build-debug
+cmake -D CMAKE_GENERATOR_PLATFORM=x64 ^
+      -D LLVM_TARGETS_TO_BUILD=X86 ^
+      -D LLVM_ENABLE_RTTI=1 ^
+      -D LLVM_USE_CRT_DEBUG=MTd ^
+      -D LLVM_USE_CRT_RELEASE=MT ^
+      -D LLVM_ENABLE_TERMINFO=OFF ^
+      -D CMAKE_INSTALL_PREFIX=C:\LLVM\install-debug ^
+      -Thost=x64 ^
+      C:\LLVM\src
+cmake --build . --config Debug -Thost=x64
+cmake --build . --config Debug --target install -Thost=x64
+</code></pre>
+            <p>Note that, in theory, you only need to use one of
+            <code>LLVM_USE_CRT_DEBUG</code> or
+            <code>LLVM_USE_CRT_RELEASE</code>, depending on whether
+            you are building Debug or Release, but it doesn't hurt
+            to always include both in the cmake line.</p>
+            <p><strong>Time and Space</strong></p>
+            <p>On an Intel® Core™ i7-8665U Processor, build time
+            for Release mode may be approximately 45 minutes.
+            Intel® Xeon® based systems with larger caches are
+            expected to build LLVM significantly faster. The build
+            and install directories required less than 3 GB of disk
+            space for release mode on the walkthrough system. The
+            debug build requires significantly more disk storage
+            (10s of GB).</p>
+            <p><a name="building-openswr" id=
+            "building-openswr"></a></p>
+            <h3 id="build-mesa-with-openswr">Build Mesa with
+            OpenSWR</h3>
+            <p>If not already using the previous x64 Native Tools
+            Command Prompt for VS 2019, launch a fresh instance.
+            You may wish to run this Command Prompt with
+            Administrator Privileges (Right Click-&gt;Run As
+            Administrator).</p>
+            <p>If your system is behind a proxy then set the proxy.
+            Many challenging connectivity errors may occur if the
+            proxy is not set:</p>
+            <pre><code>set HTTP_PROXY=&lt;http://your.proxy:port&gt;
+set HTTPS_PROXY=&lt;http://your.proxy:port&gt;
+</code></pre>
+            <p>Clone the mesa repo. Full instructions are available
+            on Mesa's <a href=
+            "https://www.mesa3d.org/repository.html">repository
+            page</a>.</p>
+            <pre><code>git clone --no-checkout https://gitlab.freedesktop.org/mesa/mesa.git mesa
+cd mesa
+git checkout mesa-21.3.7
+</code></pre>
+            <p>Add the Meson directory to your PATH. Meson is
+            typically in your <code>Scripts</code> subfolder of the
+            Python directory:</p>
+            <pre><code>set PATH=&lt;Path-to-Meson&gt;;%PATH%
+</code></pre>
+            <p>When building Mesa with OpenSWR, you must specify
+            where LLVM is installed. In doing this, we can also
+            specify the type of build. For a debug Mesa build, link
+            to the debug LLVM installation. Similarly, use a
+            release LLVM for building release Mesa. For release
+            builds, add the release <code>llvm-config.exe</code>
+            directory to your path.:</p>
+            <pre><code>set PATH=C:\LLVM\install-release\bin;%PATH%
+</code></pre>
+            <p>and for debug builds:</p>
+            <pre><code>set PATH=C:\LLVM\install-release\bin;%PATH%
+</code></pre>
+            <p>Create the Release build files:</p>
+            <pre><code>mkdir build
+meson setup --backend=vs2019 build/ \
+-Dswr-arches=avx,avx2 \
+-Dbuildtype=release \
+-Dgallium-drivers=swrast,swr \
+-Dvulkan-drivers= \
+-Ddri-drivers= \
+</code></pre>
+            <p>If you want to compile OSMesa (for off-screen
+            rendering support), add <code>-Dosmesa=true</code> to
+            the setup. Example:</p>
+            <pre><code>meson setup --backend=vs2019 build/ \
+-Dswr-arches=avx,avx2 \
+-Dbuildtype=release \
+-Dgallium-drivers=swrast,swr \
+-Dvulkan-drivers= \
+-Ddri-drivers= \
+-Dosmesa=true
+</code></pre>
+            <p><strong><em>Important</em></strong>: Systems with
+            Advanced Vector Extenstions 512 (AVX 512) support
+            should <strong>add</strong> AVX 512 support to their
+            configuration with the <code>skx</code> flag:</p>
+            <pre><code>-Dswr-arches=avx,avx2,skx
+</code></pre>
+            <p>Note: Check your target system architectural
+            capabilities by visiting the <a href=
+            "https://ark.intel.com">Intel ARK database</a>.</p>
+            <p>To see your Mesa build configuration:</p>
+            <pre><code>meson configure build
+</code></pre>
+            <p>To build Mesa with OpenSWR:</p>
+            <pre><code>meson compile -C build
+</code></pre>
+            <p>On an Intel® Core™ i7-8665U Processor, build time
+            for Release mode may be approximately 30 minutes.
+            Intel® Xeon® based systems with larger caches are
+            expected to build LLVM significantly faster. The
+            release build and install directories required less
+            than 500 MB of disk space for release mode on the
+            walkthrough system.</p>
+            <p>Deploy Mesa to your preferred directory:</p>
+            <pre><code>meson install -C build --destdir C:\swr
+</code></pre>
+            <p><strong>Troubleshoot</strong></p>
+            <p>Systems with prebuild issues related to ZLIB are
+            typically seeing connectivity or proxy issues. Check
+            your proxy settings. Use fresh, unaltered Mesa build
+            directories. Try again.</p>
+            <p><a name="using-openswr" id="using-openswr"></a></p>
+            <h3 id="using-mesa-with-openswr">Using Mesa with
+            OpenSWR</h3>
+            <p>The <code>-Dosmesa=true</code>, <code>avx</code>,
+            <code>avx2</code> build results in these library
+            files:</p>
+            <p>Runtime libraries:</p>
+            <pre><code>bin\libgallium_wgl.dll
+bin\opengl32.dll
+bin\osmesa.dll
+bin\swrAVX.dll
+bin\swrAVX2.dll
+bin\z.dll
+</code></pre>
+            <p>Header files:</p>
+            <pre><code>include\GL\gl.h
+include\GL\glcorearb.h
+include\GL\glext.h
+include\GL\osmesa.h
+include\KHR\khrplatform.h
+include\zconf.h
+include\zlib.h
+</code></pre>
+            <p>Stub link libraries and pkgconfig references:</p>
+            <pre><code>lib\libgallium_wgl.lib
+lib\opengl32.lib
+lib\osmesa.lib
+lib\pkgconfig\osmesa.pc
+lib\pkgconfig\zlib.pc
+lib\swrAVX.lib
+lib\swrAVX2.lib
+lib\z.lib
+</code></pre>
+            <p>Application configuration file:</p>
+            <pre><code>share\drirc.d\00-mesa-defaults.conf
+</code></pre>
+            <p>To make these libraries usable across the system,
+            first make a backup of any libraries listed in 'Runtime
+            Libraries' in <code>C:\Windows\system32</code>, then
+            place the above DLLs in
+            <code>C:\Windows\system32</code>. If you plan to just
+            run simple command line tests, you can simply place
+            them in your application or current directory.</p>
+            <p>To use Mesa with OpenSWR, you will need to set
+            OpenSWR as the gallium driver to use with the
+            <code>GALLIUM_DRIVER</code> environment variable:</p>
+            <p><code>set GALLIUM_DRIVER=swr</code></p>
+            <p>Without this environment variable set, the default
+            Mesa <code>llvmpipe</code> driver will be used.</p>
+            <p>Instrument OpenSWR-based applications with useful
+            environment variables. In particular, review the
+            <code>GALLIUM_</code> prefixed variables. Refer to the
+            <a href=
+            "https://docs.mesa3d.org/envvars.html">enviornment
+            variable document</a> on mesa3d.org for details on
+            variables like:</p>
+            <pre><code>GALLIUM_HUD
+GALLIUM_LOG_FILE
+GALLIUM_PRINT_OPTIONS
+GALLIUM_DUMP_CPU
+LIBGL_ALWAYS_SOFTWARE
+</code></pre>
+            <p>To send any runtime information to stderr, ensure
+            GALLIUM_PRINT_OPTIONS is set!:</p>
+            <pre><code>set GALLIUM_PRINT_OPTIONS=1</code></pre>
+            <p><code>SWR_PRINT_INFO</code> can cause the runtime to
+            emit SWR status. Documentation is limited since OpenSWR
+            has moved to the Amber Branch. You may set it before
+            running a program:</p>
+            <pre><code>set SWR_PRINT_INFO=1
+</code></pre>
+            <p>Look for a message like:</p>
+            <pre><code>SWR detected AVX2 instruction support (using: swrAVX2.dll).</code></pre>
+            <p><strong>Hello GL Quickstart</strong></p>
+            <p>Many users employ the <code>glxgears</code> and
+            <code>glxinfo</code> from the Mesa demos repository to
+            check that their distribution of Mesa is running. Note:
+            The performance advantages of OpenSWR tend to be
+            realized in scenes with much more geometry than
+            <code>glxgears</code>. View the Mesa <a href=
+            "https://gitlab.freedesktop.org/mesa/demos">demos</a>
+            for more information.</p>
+            <p>To try these applications you may wish to build them
+            in an MinGW environment as the MSVC build path is not
+            maintained (per the CMakeLists.txt file). For a hint to
+            build wglinfo from within the Mesa Demos repository,
+            this shorthand command was used on the walkthrough
+            system:</p>
+            <pre><code>cl wglinfo.c ..\xdemos\glinfo_common.c ..\glad\src\glad.c ..\glad\src\glad_wgl.c -I..\glad\include -I..\xdemos "C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\um\x64\gdi32.lib" "C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\um\x64\user32.lib" C:\swr\lib\opengl32.lib /Fe:wglinfo.exe
+</code></pre>
+            <p>There also may be quick to build windows ports of
+            glxgears and glinfo on <a href=
+            "https://github.com/search?q=windows+glxgears">Github</a>.</p>
+            <p>OpenSWR maintained by <a href=
+            "https://github.com/OpenSWR">OpenSWR</a><br>
+            For information about compiler optimizations, see our
+            <a href=
+            "https://software.intel.com/en-us/articles/optimization-notice#opt-en">
+            Optimization Notice</a>.<br>
+            ©2009-2022 Intel Corporation<br>
+            <a href=
+            "https://www.intel.com/privacy">Privacy</a></p><br>
+        </section>
+    </div><!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+        <footer class="inner">
+            <p class="copyright">OpenSWR maintained by <a href=
+            "https://github.com/OpenSWR">OpenSWR</a><br>
+            For information about compiler optimizations, see our
+            <a href=
+            "https://software.intel.com/en-us/articles/optimization-notice#opt-en">
+            Optimization Notice</a>.<br>
+            ©2009-2022 Intel Corporation<br>
+            <a href="https://www.intel.com/privacy">Privacy</a></p>
+        </footer>
+    </div>
+</body>
 </html>
